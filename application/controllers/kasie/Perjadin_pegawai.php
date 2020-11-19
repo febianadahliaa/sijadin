@@ -4,9 +4,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Perjadin_pegawai extends CI_Controller
 {
-	public function __constuct()
+	public function __construct()
 	{
-		parent::__constuct();
+		parent::__construct();
 		$this->load->model('perjadin_model');
 		$this->load->library('form_validation');
 		// if($this->kasie_model->isNotLogin()) redirect(site_url('kasie/login'));
@@ -15,10 +15,10 @@ class Perjadin_pegawai extends CI_Controller
 	public function index()
 	{
 		$data['perjadin'] = $this->perjadin_model->getAll();
-		$this->load->view('kasie/perjadin/list', $data);
+		$this->load->view('kasie/perjadin/list_perjadin', $data);
 	}
 
-	public function add()
+	public funcnion add()
 	{
 		$perjadin = $this->perjadin_model;			//objek model Perjadin_model
 		$validation = $this->form_validation;		//objek validasi

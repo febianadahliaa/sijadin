@@ -13,7 +13,7 @@
 			<div class="container-fluid">
 				<?php $this->load->view('kasie/_partials/breadcrumb.php') ?>
 
-				<!-- Data Tables -->					
+				<!-- Tabel data perjadin -->					
 				<div class="card mb-3">
 					<div class="card-header">
 						<a href="<?php echo site_url('kasie/perjadin_pegawai/add') ?>"><i class="fas fa-plus"></i> Input Perjadin</a>
@@ -26,7 +26,7 @@
 									<tr>
 										<th>NIP</th>
 										<th>Nama Pegawai</th>
-										<th>ID Kegiatan</th>
+										<th>Kode Kegiatan</th>
 										<th>Kegiatan</th>
 										<th>Tanggal</th>
 									</tr>
@@ -56,7 +56,7 @@
 				</div>
 
 			</div> <!-- /.container-fluid -->
-			<?php $this->load->view('kasie/_partials/footer.php') ?>			
+			<?php $this->load->view('kasie/_partials/footer.php') ?>
 		</div> <!-- /.content-wrapper -->
 	</div> <!-- /#wrapper -->
 
@@ -64,12 +64,12 @@
 	<?php $this->load->view('kasie/_partials/modal.php') ?>
 	<?php $this->load->view('kasie/_partials/js.php') ?>
 
-	<!-- <script>
-	function deleteConfirm(url){
+	<script>
+	function deleteConfirm(url) {
 		$('#btn-delete').attr('href', url);
 		$('#deleteModal').modal();
 	}
-	</script> -->
+	</script>
 
 </body>
 
