@@ -11,7 +11,7 @@
 		<?php $this->load->view('kasie/_partials/sidebar.php') ?>
 		<div id="content-wrapper">
 			<div id="container-fluid">
-				<!-- <?php // $this->load->view('kasie/_partials/breadcrumb.php') ?> -->
+				<!-- </?php $this->load->view('kasie/_partials/breadcrumb.php') ?> -->
 
 				<?php if ($this->session->flashdata('success')): ?>
 				<div class="alert alert-success" role="alert">
@@ -30,7 +30,6 @@
 						<form action="<?php base_url('kasie/perjadin_pegawai/add') ?>" method="post" enctype="multipart/form-data" >
 							<div class="form-group">
 								<label for="nip">NIP</label>
-								<!-- <input class="form-control <?php // echo form_error('name') ? 'is-invalid':'' ?>" type="text" name="nip" placeholder="NIP pegawai" /> -->
 								<input class="form-control <?php echo form_error('name') ? 'is-invalid':'' ?>" type="text" name="nip" list="nip" placeholder="NIP pegawai">
 							    <datalist id="nip">
 							    	<option value="3400xxx1">
@@ -47,11 +46,11 @@
 								<div class="invalid-feedback"><?php echo form_error('nama') ?></div>
 							</div>
 
-							<div class="form-group">
+							<!-- <div class="form-group">
 								<label for="kode">Kode</label>
-								<input class="form-control <?php echo form_error('kode') ? 'is-invalid':'' ?>" type="text" name="kode" placeholder="Kode kegiatan" />
-								<div class="invalid-feedback"><?php echo form_error('kode') ?></div>
-							</div>
+								<input class="form-control <?php //echo form_error('kode') ? 'is-invalid':'' ?>" type="text" name="kode" placeholder="Kode kegiatan" />
+								<div class="invalid-feedback"><?php //echo form_error('kode') ?></div>
+							</div> -->
 
 							<!-- <div class="form-group">
 								<label for="kegiatan">Kegiatan</label>
@@ -60,9 +59,9 @@
 							</div> -->
 
 							<div class="form-row">
-								<div class="form-group col-md-8">
+								<div class="form-group col-md-7">
 									<label for="kegiatan">Kegiatan</label>
-									<input class="form-control <?php echo form_error('kegiatan') ? 'is-invalid':'' ?>" type="text" name="kegiatan" list="kegiatan" placeholder="">
+									<input class="form-control <?php echo form_error('kegiatan') ? 'is-invalid':'' ?>" type="text" name="kegiatan" list="kegiatan" placeholder="Nama kegiatan">
 								    <datalist id="kegiatan">
 								    	<option value="xxx">
 								    	<option value="yyy">
@@ -70,15 +69,25 @@
 								    </datalist>
 									<div class="invalid-feedback"><?php echo form_error('kegiatan') ?></div>
 								</div>
-								<div class="form-group col-md-4">
-									<label for="kode">Atribut</label>
-									<input class="form-control <?php echo form_error('atribut') ? 'is-invalid':'' ?>" type="text" name="atribut" list="atribut" placeholder="">
+								<div class="form-group col-md-3">
+									<label for="atribut">Atribut</label>
+									<input class="form-control <?php echo form_error('atribut') ? 'is-invalid':'' ?>" type="text" name="atribut" list="atribut" placeholder="Atribut kegiatan">
 								    <datalist id="atribut">
 								    	<option value="A">
 								    	<option value="B">
 								    	<option value="C">
 								    </datalist>
 								    <div class="invalid-feedback"><?php echo form_error('atribut') ?></div>
+								</div>
+								<div class="form-group col-md-2">
+									<label for="kode">Kode</label>
+									<input class="form-control <?php echo form_error('kode') ? 'is-invalid':'' ?>" type="text" name="kode" list="kode" placeholder="Kode kegiatan">
+								    <datalist id="kode">
+								    	<option value="A1">
+								    	<option value="B1">
+								    	<option value="C1">
+								    </datalist>
+								    <div class="invalid-feedback"><?php echo form_error('kode') ?></div>
 								</div>
 							</div>
 

@@ -15,25 +15,12 @@ class Perjadin_pegawai extends CI_Controller
 	public function index()
 	{
 		$data['perjadin'] = $this->perjadin_model->getAll();
-		$this->load->view('kasie/perjadin/list_perjadin', $data);
-	}
-
-	public funcnion add()
-	{
-		$perjadin = $this->perjadin_model;			//objek model Perjadin_model
-		$validation = $this->form_validation;		//objek validasi
-		$validation->set_rules($perjadin->rules()); //terapkan rules
-
-		if ($validation->run()) {
-			$perjadin->save(); //simpan data ke db
-			$this->session->set_flashdata('success', 'Data berhasil disimpan');
-		} //jika validasi lancar
-
-		$this->load->view('kasie/perjadin/input_perjadin');
+		$this->load->view('kasie/perjadin_pegawai/list_perjadin', $data);
 	}
 
 	public function edit($idPerjadin = null)
 	{
+		$data['perjadin'] = $this->perjadin_model->getAll();
 		if (!isset($idPerjadin)) redirect('kasie/perjadin');
 
 		$perjadin = $this->perjadin_model;
@@ -45,14 +32,14 @@ class Perjadin_pegawai extends CI_Controller
 			$this->session->set_flashdata('success', 'Data berhasil disimpan');
 		}
 
-		$this->load->view('kasie/perjadin/list', $data);
+		$this->load->view('kasie/perjadin_pegawai/edit_perjadin', $data);
 	}
 
 	public function delete($idPerjadin = null)
 	{
 		if (!isset($idPerjadin)) show_404();
 		if ($this->perjadin_model->delete($idPerjadin)) {
-			redirect(site_url('kasie/perjadin/list'));
+			redirect(site_url('kasie/perjadin_pegawai'));
 		}
 	}
 }

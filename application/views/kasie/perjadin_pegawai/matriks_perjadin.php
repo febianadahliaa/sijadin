@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Perjadin Saya</title>
+	<title>Matriks Perjadin Pegawai</title>
 	<?php $this->load->view('kasie/_partials/head.php') ?>
 </head>
 
@@ -13,12 +13,11 @@
 			<div class="container-fluid">
 				<!-- </?php $this->load->view('kasie/_partials/breadcrumb.php') ?> -->
 
-				<!-- Data Tables -->					
+				<!-- Tabel data perjadin -->					
 				<div class="card mb-3">
 					<div class="card-header">
-						<h5>DAFTAR PERJADIN SAYA</h5>	
+						<h5>MATRIKS PERJADIN PEGAWAI</h5>	
 					</div>
-
 					<div class="card-body">
 						<div>
 							<select id="bulan" name="Bulan">
@@ -36,29 +35,44 @@
 								<option value="desember">Desember</option>
 							</select>	
 						</div>	
-						<div class="table-responsive">
+						
+						<!-- <div class="table-responsive">
 							<table class="table table-hover" id="dataTable" width="100%" cellspacing="0">
 								<thead>
 									<tr>
-										<th>Tanggal</th>
+										<th>NIP</th>
+										<th>Nama Pegawai</th>
+										<th>Kode Kegiatan</th>
 										<th>Kegiatan</th>
+										<th>Tanggal</th>
 									</tr>
 								</thead>
 								<tbody>
-									<?php foreach ($perjadin as $perjadin_): ?>
+									<?php foreach ($perjadin as $row): ?>
 									<tr>
-										<td><?php echo $perjadin_->tanggal ?></td>
-										<td><?php echo $perjadin_->namaKegiatan ?></td>
+										<td><?php echo $row->nip ?></td>
+										<td><?php echo $row->nip ?></td>
+										<td><?php echo $row->idKegiatan ?></td>
+										<td><?php echo $row->namaKegiatan ?></td>
+										<td><?php echo $row->tanggal ?></td>
+										
+										<td width="250">
+											<a href="<?php echo site_url('kasie/perjadin_pegawai/edit/'.$row->idPerjadin) ?>"
+											 class="btn btn-small"><i class="fas fa-edit"></i> Edit</a>
+											<a onclick="deleteConfirm('<?php echo site_url('kasie/perjadin_pegawai/delete/'.$row->idPerjadin) ?>')"
+											 href="#!" class="btn btn-small text-danger"><i class="fas fa-trash"></i> Hapus</a>
+										</td>
 									</tr>
 									<?php endforeach; ?>
+
 								</tbody>
 							</table>
-						</div> <!-- /.table-responsive -->
-					</div> <!-- /.card-body -->
+						</div> -->
+					</div>
 				</div>
 
 			</div> <!-- /.container-fluid -->
-			<?php $this->load->view('kasie/_partials/footer.php') ?>			
+			<?php $this->load->view('kasie/_partials/footer.php') ?>
 		</div> <!-- /.content-wrapper -->
 	</div> <!-- /#wrapper -->
 
@@ -67,7 +81,7 @@
 	<?php $this->load->view('kasie/_partials/js.php') ?>
 
 	<!-- <script>
-	function deleteConfirm(url){
+	function deleteConfirm(url) {
 		$('#btn-delete').attr('href', url);
 		$('#deleteModal').modal();
 	}

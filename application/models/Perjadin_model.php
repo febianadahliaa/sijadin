@@ -2,7 +2,7 @@
 
 class Perjadin_model extends CI_Model
 {
-	private $_table = 'perjadin';
+	private $mytable = 'perjadin';
 
 	public $idPerjadin;
 	public $nip;
@@ -33,12 +33,12 @@ class Perjadin_model extends CI_Model
 
 	public function getAll()
 	{
-		return $this->db->get($this->_table)->result(); 
+		return $this->db->get($this->mytable)->result(); 
 	} //mengambil semua data dari database (tabel perjadin)
 
 	public function getById($idPerjadin)
 	{
-		return $this->db->get_where($this->_table, ['idPerjadin' => $idPerjadin])->row();
+		return $this->db->get_where($this->mytable, ['idPerjadin' => $idPerjadin])->row();
 	} //mengembalikan sebuah objek (yg sesuai dg id)
 
 	public function save()
@@ -49,7 +49,7 @@ class Perjadin_model extends CI_Model
 		$this->idKegiatan = $post['idKegiatan'];
 		$this->namaKegiatan = $post['namaKegiatan'];
 		$this->tanggal = $post['tanggal'];
-		return $this->db->insert($this->_table, $this); //menyimpan data ke db
+		return $this->db->insert($this->mytable, $this); //menyimpan data ke db
 	}
 
 	public function update()
@@ -60,12 +60,12 @@ class Perjadin_model extends CI_Model
 		$this->idKegiatan = $post['idKegiatan'];
 		$this->namaKegiatan = $post['namaKegiatan'];
 		$this->tanggal = $post['tanggal'];
-		return $this->db->update($this->_table, $this, array('idPerjadin' => $post['idPerjadin']));
+		return $this->db->update($this->mytable, $this, array('idPerjadin' => $post['idPerjadin']));
 	}
 
 	public function delete($idPerjadin)
 	{
-		return $this->db->delete($this->_table, array('idPerjadin' => $idPerjadin));
+		return $this->db->delete($this->mytable, array('idPerjadin' => $idPerjadin));
 	}
 }
 

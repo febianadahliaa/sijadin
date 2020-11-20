@@ -2,7 +2,7 @@
 <ul class="sidebar navbar-nav">
 
     <li class="nav-item <?php echo $this->uri->segment(2) == '' ? 'active': '' ?>">
-        <a class="nav-link" href="<?php echo site_url('kasie/overview') ?>">
+        <a class="nav-link" href="<?php echo site_url('kasie/perjadinku') ?>">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Perjadin Saya</span>
         </a>
@@ -16,7 +16,8 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
             <a class="dropdown-item" href="<?php echo site_url('kasie/perjadin_pegawai') ?>">List</a>
-            <a class="dropdown-item" href="<?php echo site_url('kasie/perjadin') ?>">Matriks</a>
+            <a class="dropdown-item" href="<?php echo site_url('kasie/input_perjadin') ?>">Input Perjadin</a>
+            <a class="dropdown-item" href="<?php echo site_url('kasie/matriks_perjadin') ?>">Matriks</a>
         </div>
     </li>
 
