@@ -34,31 +34,31 @@
 								<option value="november">November</option>
 								<option value="desember">Desember</option>
 							</select>	
-						</div>			
+						</div>
+						<br>
 						<div class="table-responsive">
 							<table class="table table-hover" id="dataTable" width="100%" cellspacing="0">
 								<thead>
 									<tr>
 										<th>NIP</th>
 										<th>Nama Pegawai</th>
-										<th>Kode Kegiatan</th>
 										<th>Kegiatan</th>
 										<th>Tanggal</th>
+										<th>Action</th>
 									</tr>
 								</thead>
+
 								<tbody>
-									<?php foreach ($perjadin as $row): ?>
+									<?php foreach ($data_perjadin as $nilai): ?>
 									<tr>
-										<td><?php echo $row->nip ?></td>
-										<td><?php echo $row->nip ?></td>
-										<td><?php echo $row->idKegiatan ?></td>
-										<td><?php echo $row->namaKegiatan ?></td>
-										<td><?php echo $row->tanggal ?></td>
-										
+										<td><?php echo $nilai->nip ?></td>
+										<td><?php echo $nilai->nama ?></td>
+										<td><?php echo $nilai->namaAtribut . ' ' . $nilai->namaKegiatan ?></td>
+										<td><?php echo $nilai->tanggal ?></td>
 										<td width="250">
-											<a href="<?php echo site_url('kasie/perjadin_pegawai/edit/'.$row->idPerjadin) ?>"
+											<a href="<?php echo site_url('kasie/perjadin_pegawai/edit/' . $nilai->idPerjadin) ?>"
 											 class="btn btn-small"><i class="fas fa-edit"></i> Edit</a>
-											<a onclick="deleteConfirm('<?php echo site_url('kasie/perjadin_pegawai/delete/'.$row->idPerjadin) ?>')"
+											<a onclick="deleteConfirm('<?php echo site_url('kasie/perjadin_pegawai/delete/' . $nilai->idPerjadin) ?>')"
 											 href="#!" class="btn btn-small text-danger"><i class="fas fa-trash"></i> Hapus</a>
 										</td>
 									</tr>

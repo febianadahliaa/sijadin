@@ -35,7 +35,8 @@
 								<option value="november">November</option>
 								<option value="desember">Desember</option>
 							</select>	
-						</div>	
+						</div>
+						<br>
 						<div class="table-responsive">
 							<table class="table table-hover" id="dataTable" width="100%" cellspacing="0">
 								<thead>
@@ -45,10 +46,10 @@
 									</tr>
 								</thead>
 								<tbody>
-									<?php foreach ($perjadin as $perjadin_): ?>
+									<?php foreach ($data_perjadin as $nilai): ?>
 									<tr>
-										<td><?php echo $perjadin_->tanggal ?></td>
-										<td><?php echo $perjadin_->namaKegiatan ?></td>
+										<td><?php echo $nilai->tanggal ?></td>
+										<td><?php echo $nilai->namaAtribut . ' ' . $nilai->namaKegiatan ?></td>
 									</tr>
 									<?php endforeach; ?>
 								</tbody>

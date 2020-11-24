@@ -1,9 +1,8 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
 class User_model extends CI_Model
-{
-	private $mytable = 'users';
-
+{	
+	// private $mytable = 'users';
 	// public $nama;
 	// public $username;
 	// public $paswword;

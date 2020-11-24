@@ -27,37 +27,30 @@
 					<div class="card-body">
 						
 						<!-- Form untuk input -->
+						<script src="<?php echo base_url(); ?>assets/ajax.js"></script>
 						<form action="<?php base_url('kasie/perjadin_pegawai/add') ?>" method="post" enctype="multipart/form-data" >
-							<div class="form-group">
-								<label for="nip">NIP</label>
-								<input class="form-control <?php echo form_error('name') ? 'is-invalid':'' ?>" type="text" name="nip" list="nip" placeholder="NIP pegawai">
-							    <datalist id="nip">
-							    	<option value="3400xxx1">
-							    	<option value="3400xxx2">
-							    	<option value="12345678">
-							    	<option value="20000000">
-							    </datalist>
-								<div class="invalid-feedback"><?php echo form_error('nip') ?></div>
+							<div class="form-row">
+								<div class="form-group col-md-4">
+									<label for="nip">NIP</label>
+									<input class="form-control <?php echo form_error('name') ? 'is-invalid':'' ?>" list="daftar_nip_pegawai" type="text" name="nip" id="nip" placeholder="NIP pegawai" onchange="return autofill()";>
+									<datalist id='daftar_nip_pegawai'>
+										<?php
+										foreach ($data_user->result() as $nilai)
+										{
+											echo "<option value='$nilai->nip'>$nilai->nama</option>";
+										}
+										?>
+									</datalist>
+									<!-- <div class="invalid-feedback"></?php echo form_error('nip') ?></div> -->
+								</div>
+
+								<div class="form-group col-md-8">
+									<label for="nama">Nama</label>
+									<input class="form-control </?php echo form_error('nama') ? 'is-invalid':'' ?>" type="text" name="nama" placeholder="Nama pegawai" />
+									<!-- <div class="invalid-feedback"></?php echo form_error('nama') ?></div> -->
+								</div>
 							</div>
-
-							<div class="form-group">
-								<label for="nama">Nama</label>
-								<input class="form-control <?php echo form_error('nama') ? 'is-invalid':'' ?>" type="text" name="nama" placeholder="Nama pegawai" />
-								<div class="invalid-feedback"><?php echo form_error('nama') ?></div>
-							</div>
-
-							<!-- <div class="form-group">
-								<label for="kode">Kode</label>
-								<input class="form-control <?php //echo form_error('kode') ? 'is-invalid':'' ?>" type="text" name="kode" placeholder="Kode kegiatan" />
-								<div class="invalid-feedback"><?php //echo form_error('kode') ?></div>
-							</div> -->
-
-							<!-- <div class="form-group">
-								<label for="kegiatan">Kegiatan</label>
-								<input class="form-control <?php //echo form_error('kegiatan') ? 'is-invalid':'' ?>" type="text" name="kegiatan" placeholder="Nama kegiatan" />
-								<div class="invalid-feedback"><?php //echo form_error('kegiatan') ?></div>
-							</div> -->
-
+							
 							<div class="form-row">
 								<div class="form-group col-md-7">
 									<label for="kegiatan">Kegiatan</label>
@@ -91,6 +84,17 @@
 								</div>
 							</div>
 
+							<!-- <div class="form-group">
+								<label for="kode">Kode</label>
+								<input class="form-control </?php //echo form_error('kode') ? 'is-invalid':'' ?>" type="text" name="kode" placeholder="Kode kegiatan" />
+								<div class="invalid-feedback"></?php //echo form_error('kode') ?></div>
+							</div>
+							<div class="form-group">
+								<label for="kegiatan">Kegiatan</label>
+								<input class="form-control </?php //echo form_error('kegiatan') ? 'is-invalid':'' ?>" type="text" name="kegiatan" placeholder="Nama kegiatan" />
+								<div class="invalid-feedback"></?php //echo form_error('kegiatan') ?></div>
+							</div> -->
+
 							<div class="form-group">
 								<label for="tanggal">Tanggal</label>
 								<input class="form-control <?php echo form_error('tanggal') ? 'is-invalid':'' ?>" type="date" name="tanggal" placeholder="Tanggal kegiatan" />
@@ -99,6 +103,46 @@
 
 							<input class="btn btn-success" type="submit" name="btn" value="Input" />
 						</form>
+
+						<script>
+							function autofill(){
+								var nip =document.getElementById('nip').value;
+								$.ajax({
+											url:"<?php echo base_url();?>index.php/input_perjadin/searchUser",
+											data:'&nip='+nip,
+											success:function(data){
+												var hasil = JSON.parse(data);  
+											
+									$.each(hasil, function(key,val){ 
+										
+									document.getElementById('nip').value=val.nip;
+												document.getElementById('nama').value=val.nama;
+										});
+									}
+										});
+							}
+						</script>
+
+
+
+						<!-- <script>
+							function autofill() {
+								var nip = document.getElementById('nip').value;
+								$.ajax({
+										url:"</?php echo base_url();?>index.php/input_perjadin/searchUser",
+										data:'&nip='+nip,
+										success:function(data) {
+											var hasil = JSON.parse(data);  
+											
+											$.each(hasil, function(key,val) { 
+										
+												document.getElementById('nip').value=val.nip;
+												document.getElementById('nama').value=val.nama;  
+											});
+										}
+								});			
+							}
+						</script> -->
 
 					</div>
 

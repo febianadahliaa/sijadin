@@ -2,7 +2,6 @@
 
 class Perjadinku extends CI_Controller
 {
-	
 	function __construct()
 	{
 		parent::__construct();
@@ -12,7 +11,7 @@ class Perjadinku extends CI_Controller
 
 	public function index()
 	{
-		$data['perjadin'] = $this->perjadin_model->getAll();
+		$data['data_perjadin'] = $this->perjadin_model->getAll();
 		$this->load->view('kasie/perjadinku', $data); //load halaman view tabel perjadin dari kasie
 	}
 }

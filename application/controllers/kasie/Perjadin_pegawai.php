@@ -14,14 +14,14 @@ class Perjadin_pegawai extends CI_Controller
 
 	public function index()
 	{
-		$data['perjadin'] = $this->perjadin_model->getAll();
+		$data['data_perjadin'] = $this->perjadin_model->getAll();
 		$this->load->view('kasie/perjadin_pegawai/list_perjadin', $data);
-	}
+	} //read data
 
 	public function edit($idPerjadin = null)
 	{
 		$data['perjadin'] = $this->perjadin_model->getAll();
-		if (!isset($idPerjadin)) redirect('kasie/perjadin');
+		if (!isset($idPerjadin)) redirect('kasie/perjadin_pegawai');
 
 		$perjadin = $this->perjadin_model;
 		$validation = $this->form_validation;

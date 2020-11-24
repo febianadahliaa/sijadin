@@ -8,13 +8,21 @@ class Input_perjadin extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('perjadin_model');
+		// $this->load->model('user_model');
 		$this->load->library('form_validation');
 	}
 
 	public function index()
 	{
-		$this->load->view('kasie/perjadin_pegawai/input_perjadin');
+		$data['data_user'] = $this->perjadin_model->getUser();
+		$this->load->view('kasie/perjadin_pegawai/input_perjadin', $data);
 	}
+
+	public function searchUser(){
+        $nip=$_GET['nip'];
+        $pengguna = $this->perjadin_model->getUserByNip($nip)->result();
+        echo json_encode($pengguna);
+    }
 
 	public function add()
 	{

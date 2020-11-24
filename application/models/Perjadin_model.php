@@ -2,12 +2,39 @@
 
 class Perjadin_model extends CI_Model
 {
+	public function getAll()
+	{
+		// $this->db->select('perjadin.idPerjadin, perjadin.nip, perjadin.idKegiatan, perjadin.idAtribut, perjadin.tanggal, kegiatan.idKegiatan, kegiatan.namaKegiatan, atribut.idAtribut, pengguna.nip, pengguna.nama');
+		$this->db->select('*')
+			->from('perjadin')
+			->join('kegiatan', 'perjadin.idKegiatan = kegiatan.idKegiatan')
+			->join('atribut', 'perjadin.idAtribut = atribut.idAtribut')
+			->join('pengguna', 'perjadin.nip = pengguna.nip');
+		$query = $this->db->get();
+		return $query->result();
+	} //ambil semua data hasil join tabel perjadin, kegiatan, atribut, dan pengguna
+
+	public function getUser()
+	{
+		return $this->db->get('pengguna');
+	}
+
+	public function getUserByNip($id)
+	{
+		$query = $this->db->get_where('pengguna', array('nip' => $id));
+		return $query;
+	}
+
+
+
+
+
 	private $mytable = 'perjadin';
 
 	public $idPerjadin;
 	public $nip;
 	public $idKegiatan;
-	public $namaKegiatan;
+	public $idAtribut;
 	public $tanggal;
 
 	public function rules()
@@ -21,8 +48,8 @@ class Perjadin_model extends CI_Model
 			'label' => 'IdKegiatan',
 			'rules' => 'required'],
 
-			['filed' => 'namaKegiatan',
-			'label' => 'NamaKegiatan',
+			['filed' => 'idAtribut',
+			'label' => 'IdAtribut',
 			'rules' => 'required'],
 
 			['filed' => 'tanggal',
@@ -31,7 +58,7 @@ class Perjadin_model extends CI_Model
 		];
 	} //mengembalikan sebuah array yg berisi rules (untuk validasi input)
 
-	public function getAll()
+	public function getAll_()
 	{
 		return $this->db->get($this->mytable)->result(); 
 	} //mengambil semua data dari database (tabel perjadin)
