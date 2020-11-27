@@ -1,63 +1,53 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">   <meta name="description" content="Tutorial Codeigniter Membuat Hak Akses Menggunakan Jquery dan Mysql">
-    <meta name="author" content="Ilmucoding">
-    <title>Halaman Login</title>
-    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/sign-in/">
-    <!-- Bootstrap core CSS -->   <link href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom styles for this template -->
-    <link href="https://getbootstrap.com/docs/4.0/examples/sign-in/signin.css" rel="stylesheet">
-</head>
+<div class="container">
 
-<body class="text-center">
-    <form class="form-signin" action="<?= base_url('auth/loginForm') ?>" method="post">
-        
-        <h1 class="h3 mb-3 font-weight-normal">Silahkan Login Di Sini</h1>
-        <?php
-        $errors = $this->session->flashdata('errors');
-        if (!empty($errors)) {
-        ?>
-            <div class="row">
-                <div class="col-md-12">
-                <div class="alert alert-danger text-center">
-                    <?php foreach($errors as $key=>$error){ ?>
-                    <?php echo "$error<br>"; ?>
-                    <?php } ?>
-                </div>
-                </div>
-            </div>
-        <?php
-        }
-        if ($msg = $this->session->flashdata('error_login')) { ?>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="alert alert-danger text-center">
-                        <?= $msg ?>
+    <!-- Outer Row -->
+    <div class="row justify-content-center">
+
+        <div class="col-lg-6">
+
+            <div class="card o-hidden border-0 shadow-lg my-5">
+                <div class="card-body p-0">
+                    <!-- Nested Row within Card Body -->
+                    <div class="row">
+                        <div class="col-lg">
+                            <div class="p-5">
+                                <div class="text-center">
+                                    <h1 class="h4 text-gray-900 mb-4">Silahkan Login di Sini</h1>
+                                </div>
+                                <form class="user" method="post" action="<?= base_url('auth'); ?>">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control form-control-user" id="email" name="email" placeholder="Masukkan email (nama@bps.go.id)" value="<?= set_value('email'); ?>">
+                                        <?= form_error('email', '<small class="text-danger pl-3">', '</small>') ?>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="password" class="form-control form-control-user" id="password" name="password" placeholder="Password">
+                                        <?= form_error('password', '<small class="text-danger pl-3">' , '</small>') ?>
+                                    </div>
+                                    <!-- <div class="form-group">
+                                        <div class="custom-control custom-checkbox small">
+                                            <input type="checkbox" class="custom-control-input" id="customCheck">
+                                            <label class="custom-control-label" for="customCheck">Remember Me</label>
+                                        </div>
+                                    </div> -->
+                                    <button type="submit" class="btn btn-primary btn-user btn-block">
+                                        Login
+                                    </button>
+                                </form>
+                                <hr>
+                                <div class="text-center">
+                                    <a class="small" href="forgot-password.html">Lupa password?</a>
+                                </div>
+                                <!-- <div class="text-center">
+                                    <a class="small" href="</?= base_url('auth/register') ?>">Create an Account!</a>
+                                </div> -->
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        <?php } else if ($msg = $this->session->flashdata('success_login')) { ?>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="alert alert-success text-center">
-                        <?= $msg ?>
-                    </div>
-                </div>
-            </div>
-        <?php } ?>
 
-        <input name="email" type="email" id="inputEmail" class="form-control" placeholder="Email (nama@bps.go.id)" required autofocus>     <input name="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-        <div class="checkbox mb-3">
-        <label>
-            <input type="checkbox" value="remember-me"> Ingat saya
-        </label>
         </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
-        <!-- <a href="<?= base_url('auth/register') ?>" class="float-left mt-1">Register</a> -->
-        <p class="mt-5 mb-3 text-muted">&copy; sijadin 2020</p>
-    </form>
-</body>
 
-</html>
+    </div>
+
+</div>
