@@ -14,8 +14,14 @@ class Input_perjadin extends CI_Controller
 
 	public function index()
 	{
+		$data['title'] = 'Input Perjadin Pegawai';
 		$data['data_user'] = $this->perjadin_model->getUser();
-		$this->load->view('kasie/perjadin_pegawai/input_perjadin', $data);
+
+		$this->load->view('partials_/header', $data);
+        $this->load->view('partials_/sidebar', $data);
+        $this->load->view('partials_/topbar', $data);
+        $this->load->view('kasie/input_perjadin', $data);
+        $this->load->view('partials_/footer', $data);
 	}
 
 	public function searchUser(){
@@ -35,7 +41,7 @@ class Input_perjadin extends CI_Controller
 			$this->session->set_flashdata('success', 'Data berhasil disimpan');
 		} //jika validasi lancar
 
-		$this->load->view('kasie/perjadin_pegawai/input_perjadin');
+		$this->load->view('kasie/input_perjadin');
 	}
 }
 

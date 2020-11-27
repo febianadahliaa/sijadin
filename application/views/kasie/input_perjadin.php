@@ -32,7 +32,7 @@
 							<div class="form-row">
 								<div class="form-group col-md-4">
 									<label for="nip">NIP</label>
-									<input class="form-control <?php echo form_error('name') ? 'is-invalid':'' ?>" list="daftar_nip_pegawai" type="text" name="nip" id="nip" placeholder="NIP pegawai" onchange="return autofill()";>
+									<input class="form-control <?php echo form_error('nip') ? 'is-invalid':'' ?>" list="daftar_nip_pegawai" type="text" name="nip" id="nip" placeholder="NIP pegawai" onchange="return autofill()";>
 									<datalist id='daftar_nip_pegawai'>
 										<?php
 										foreach ($data_user->result() as $nilai)
@@ -52,25 +52,25 @@
 							</div>
 							
 							<div class="form-row">
-								<div class="form-group col-md-7">
-									<label for="kegiatan">Kegiatan</label>
-									<input class="form-control <?php echo form_error('kegiatan') ? 'is-invalid':'' ?>" type="text" name="kegiatan" list="kegiatan" placeholder="Nama kegiatan">
-								    <datalist id="kegiatan">
-								    	<option value="xxx">
-								    	<option value="yyy">
-								    	<option value="zzz">
-								    </datalist>
-									<div class="invalid-feedback"><?php echo form_error('kegiatan') ?></div>
-								</div>
 								<div class="form-group col-md-3">
 									<label for="atribut">Atribut</label>
 									<input class="form-control <?php echo form_error('atribut') ? 'is-invalid':'' ?>" type="text" name="atribut" list="atribut" placeholder="Atribut kegiatan">
 								    <datalist id="atribut">
-								    	<option value="A">
-								    	<option value="B">
-								    	<option value="C">
+								    	<option value="A01 - Pengawasan">
+								    	<option value="B01 - REvisit">
+								    	<option value="C01 - Pemeriksaan">
 								    </datalist>
 								    <div class="invalid-feedback"><?php echo form_error('atribut') ?></div>
+								</div>
+								<div class="form-group col-md-7">
+									<label for="kegiatan">Kegiatan</label>
+									<input class="form-control <?php echo form_error('kegiatan') ? 'is-invalid':'' ?>" type="text" name="kegiatan" list="kegiatan" placeholder="Nama kegiatan">
+								    <datalist id="kegiatan">
+								    	<option value="A02 - Survei perdagangan besar">
+								    	<option value="A03 - Survei kerangka sampel area">
+								    	<option value="A04 - Survei ubinan">
+								    </datalist>
+									<div class="invalid-feedback"><?php echo form_error('kegiatan') ?></div>
 								</div>
 								<div class="form-group col-md-2">
 									<label for="kode">Kode</label>

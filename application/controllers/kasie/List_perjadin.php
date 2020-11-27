@@ -2,7 +2,7 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Perjadin_pegawai extends CI_Controller
+class List_perjadin extends CI_Controller
 {
 	public function __construct()
 	{
@@ -14,8 +14,14 @@ class Perjadin_pegawai extends CI_Controller
 
 	public function index()
 	{
+		$data['title'] = 'Daftar Perjadin Pegawai';
 		$data['data_perjadin'] = $this->perjadin_model->getAll();
-		$this->load->view('kasie/perjadin_pegawai/list_perjadin', $data);
+
+		$this->load->view('partials_/header', $data);
+        $this->load->view('partials_/sidebar', $data);
+        $this->load->view('partials_/topbar', $data);
+		$this->load->view('kasie/list_perjadin', $data);
+        $this->load->view('partials_/footer', $data);
 	} //read data
 
 	public function edit($idPerjadin = null)
@@ -32,7 +38,12 @@ class Perjadin_pegawai extends CI_Controller
 			$this->session->set_flashdata('success', 'Data berhasil disimpan');
 		}
 
-		$this->load->view('kasie/perjadin_pegawai/edit_perjadin', $data);
+		$data['title'] = 'Edit Perjadin Pegawai';
+		$this->load->view('partials_/header', $data);
+        $this->load->view('partials_/sidebar', $data);
+        $this->load->view('partials_/topbar', $data);
+		$this->load->view('kasie/edit_perjadin', $data);
+        $this->load->view('partials_/footer', $data);
 	}
 
 	public function delete($idPerjadin = null)
