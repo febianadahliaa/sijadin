@@ -11,6 +11,9 @@ class Auth_model extends CI_Model
             return array();
         }
     }
-}
 
-?>
+    public function isNotLogin()
+    {
+        return $this->session->userdata('email') === null;
+    }
+}

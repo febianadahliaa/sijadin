@@ -1,6 +1,6 @@
 <?php
 
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 class Auth extends CI_Controller
 {
@@ -41,7 +41,6 @@ class Auth extends CI_Controller
 				$data = [
 					'email' => $user['email'],
 					'role_id' => $user['idPeran'],
-					'nama' => $user['nama']
 				];
 				$this->session->set_userdata($data);
 				if ($user['idPeran'] == 1) {

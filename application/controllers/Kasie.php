@@ -6,19 +6,21 @@ class Kasie extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('perjadin_model');
-		//if($this->kasie_model->isNotLogin()) redirect(site_url('kasie/login'));
+		$this->load->model('auth_model');
+		if ($this->auth_model->isNotLogin()) redirect(site_url('/auth'));
 	}
 
 	public function index()
 	{
 		$data['title'] = 'Daftar Perjadin Saya';
 		$data['data_perjadin'] = $this->perjadin_model->getAll();
-        
-        $this->load->view('partials_/header', $data);
-        $this->load->view('partials_/sidebar', $data);
-        $this->load->view('partials_/topbar', $data);
-        $this->load->view('kasie/index', $data);
-        $this->load->view('partials_/footer', $data);
+		$data['user'] = $this->db->get_where('pengguna', ['email' => $this->session->userdata('email')])->row_array();
+
+		$this->load->view('partials_/header', $data);
+		$this->load->view('partials_/sidebar', $data);
+		$this->load->view('partials_/topbar', $data);
+		$this->load->view('kasie/index', $data);
+		$this->load->view('partials_/footer', $data);
 	}
 
 	public function edit($idPerjadin = null)
@@ -36,10 +38,10 @@ class Kasie extends CI_Controller
 		}
 
 		$this->load->view('partials_/header', $data);
-        $this->load->view('partials_/sidebar', $data);
-        $this->load->view('partials_/topbar', $data);
-        $this->load->view('kasie/edit_perjadin', $data);
-        $this->load->view('partials_/footer', $data);
+		$this->load->view('partials_/sidebar', $data);
+		$this->load->view('partials_/topbar', $data);
+		$this->load->view('kasie/edit_perjadin', $data);
+		$this->load->view('partials_/footer', $data);
 	}
 
 	public function delete($idPerjadin = null)
@@ -50,5 +52,3 @@ class Kasie extends CI_Controller
 		}
 	}
 }
-
-?>
