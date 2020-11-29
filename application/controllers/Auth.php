@@ -40,13 +40,13 @@ class Auth extends CI_Controller
 			if (password_verify($password, $user['password'])) {
 				$data = [
 					'email' => $user['email'],
-					'role_id' => $user['role'],
+					'role_id' => $user['idPeran'],
 					'nama' => $user['nama']
 				];
 				$this->session->set_userdata($data);
-				if (strcmp($data['role_id'], 'kasie') == 0) {
+				if ($user['idPeran'] == 1) {
 					redirect('kasie');
-				} elseif (strcmp($data['role_id'], 'kepala') == 0) {
+				} elseif ($user['idPeran'] == 2) {
 					redirect('kepala');
 				} else {
 					redirect('staff_ksk');
@@ -65,7 +65,7 @@ class Auth extends CI_Controller
 	{
 		$this->session->unset_userdata('email');
 		$this->session->unset_userdata('role_id');
-		$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Anda sudah keluar!</div>');
+		$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Anda sudah keluar!</div>');
 		redirect('auth');
 	}
 
