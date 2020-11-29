@@ -8,7 +8,7 @@ class Auth extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->library('form_validation');
-		// $this->load->library('session');
+		$this->load->library('session');
 		$this->load->model('auth_model');
 	}
 
@@ -18,11 +18,13 @@ class Auth extends CI_Controller
 		$this->form_validation->set_rules('password', 'Password', 'trim|required');
 
 		if ($this->form_validation->run() == false) {
+			// validation failed
 			$data['title'] = 'Login Pengguna';
 			$this->load->view('partials_/auth_header', $data);
 			$this->load->view('auth/login');
 			$this->load->view('partials_/auth_footer');
 		} else {
+			// validation success
 			$this->_login();
 		}
 	}
@@ -33,17 +35,18 @@ class Auth extends CI_Controller
 		$password = $this->input->post('password');
 
 		$user = $this->db->get_where('pengguna', ['email' => $email])->row_array();
-		
+
 		if ($user) {
 			if (password_verify($password, $user['password'])) {
 				$data = [
 					'email' => $user['email'],
-					'role_id' => $user['idPeran']
+					'role_id' => $user['role'],
+					'nama' => $user['nama']
 				];
 				$this->session->set_userdata($data);
-				if ($user['role_id'] == 1) {
+				if (strcmp($data['role_id'], 'kasie') == 0) {
 					redirect('kasie');
-				} elseif ($user['role_id'] == 2) {
+				} elseif (strcmp($data['role_id'], 'kepala') == 0) {
 					redirect('kepala');
 				} else {
 					redirect('staff_ksk');
@@ -101,5 +104,3 @@ class Auth extends CI_Controller
 	// 	}
 	// }
 }
-
-?>
