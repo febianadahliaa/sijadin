@@ -8,7 +8,7 @@ class Auth extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->library('form_validation');
-		// $this->load->library('session');
+		$this->load->library('session');
 		$this->load->model('auth_model');
 	}
 
@@ -16,57 +16,28 @@ class Auth extends CI_Controller
 	{
 		$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
 		$this->form_validation->set_rules('password', 'Password', 'trim|required');
-
-		if ($this->form_validation->run() == false) {
+		
+		if ($this->form_validation->run()) {
+			$this->auth_model->login();
+		} else {
 			$data['title'] = 'Login Pengguna';
 			$this->load->view('partials_/auth_header', $data);
-			$this->load->view('auth/login');
+			$this->load->view('login');
 			$this->load->view('partials_/auth_footer');
-		} else {
-			$this->_login();
 		}
 	}
-
-	private function _login()
-	{
-		$email = $this->input->post('email');
-		$password = $this->input->post('password');
-
-		$user = $this->db->get_where('pengguna', ['email' => $email])->row_array();
-		
-		if ($user) {
-			if (password_verify($password, $user['password'])) {
-				$data = [
-					'email' => $user['email'],
-					'role_id' => $user['idPeran']
-				];
-				$this->session->set_userdata($data);
-				if ($user['role_id'] == 1) {
-					redirect('kasie');
-				} elseif ($user['role_id'] == 2) {
-					redirect('kepala');
-				} else {
-					redirect('staff_ksk');
-				}
-			} else {
-				$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Password salah!</div>');
-				redirect('auth');
-			}
-		} else {
-			$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Email tidak terdaftar!</div>');
-			redirect('auth');
-		}
-	}
-
+	
 	public function logout()
 	{
 		$this->session->unset_userdata('email');
 		$this->session->unset_userdata('role_id');
-		$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Anda sudah keluar!</div>');
+		$this->session->set_flashdata('message', 'Anda sudah keluar!');
 		redirect('auth');
 	}
 
 
+	
+	// ??? 
 
 	// public function register()
 	// {
