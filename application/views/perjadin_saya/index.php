@@ -1,6 +1,6 @@
-<!-- Begin Page Content -->
+h<!-- Begin Page Content -->
 <div class="container-fluid">
-    <!-- </?php $this->load->view('partials_/breadcrumb.php') ?> -->
+    <!-- </?php $this->load->view('kasie/_partials/breadcrumb.php') ?> -->
 
     <!-- Data Tables -->					
     <div class="card mb-3">
@@ -35,10 +35,10 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($data_perjadin as $nilai): ?>
+                        <?php foreach ($data_perjadin as $value): ?>
                         <tr>
-                            <td><?php echo $nilai->tanggal ?></td>
-                            <td><?php echo $nilai->namaAtribut . ' ' . $nilai->namaKegiatan ?></td>
+                            <td><?php echo $value->date ?></td>
+                            <td><?php echo $value->attribute . ' ' . $value->activity ?></td>
                         </tr>
                         <?php endforeach; ?>
                     </tbody>

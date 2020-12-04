@@ -45,9 +45,9 @@
 							<td><?php echo $nilai->namaAtribut . ' ' . $nilai->namaKegiatan ?></td>
 							<td><?php echo $nilai->tanggal ?></td>
 							<td width="250">
-								<a href="<?php echo site_url('kasie/perjadin_pegawai/edit/' . $nilai->idPerjadin) ?>"
+								<a href="<?php echo site_url('/kasie/edit/' . $nilai->idPerjadin) ?>"
 									class="btn btn-small"><i class="fas fa-edit"></i> Edit</a>
-								<a onclick="deleteConfirm('<?php echo site_url('kasie/perjadin_pegawai/delete/' . $nilai->idPerjadin) ?>')"
+								<a onclick="deleteConfirm('<?php echo site_url('/kasie/delete/' . $nilai->idPerjadin) ?>')"
 									href="#!" class="btn btn-small text-danger"><i class="fas fa-trash"></i> Hapus</a>
 							</td>
 						</tr>
