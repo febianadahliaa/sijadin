@@ -23,7 +23,7 @@
 </a>
 
 <!-- Logout Modal-->
-<!-- <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -39,7 +39,7 @@
             </div>
         </div>
     </div>
-</div> -->
+</div>
 
 <!-- Bootstrap core JavaScript-->
 <script src="<?= base_url('assets/'); ?>vendor/jquery/jquery.min.js"></script>
@@ -52,10 +52,10 @@
 <script src="<?= base_url('assets/'); ?>js/sb-admin-2.min.js"></script>
 
 <!-- Sweet Alert -->
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script> -->
 
 <!-- Logout with Sweet Alert -->
-<script type="text/javascript">
+<!-- <script type="text/javascript">
     $(".logout").click(function() {
         Swal.fire({
             titleText: 'Apakah yakin ingin keluar?',
@@ -75,10 +75,10 @@
             }
         });
     });
-</script>
+</script> -->
 
 <!-- Delete with Sweet Alert -->
-<script type="text/javascript">
+<!-- <script type="text/javascript">
     $(".remove").click(function() {
         var id = $(this).parents("tr").attr("id");
 
@@ -123,7 +123,7 @@
             }
         })
     });
-</script>
+</script> -->
 
 </body>
 
