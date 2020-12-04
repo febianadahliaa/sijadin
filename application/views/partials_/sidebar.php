@@ -1,74 +1,73 @@
 <!-- Sidebar -->
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-                <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-file-alt"></i>
-                </div>
-                <div class="sidebar-brand-text mx-3">sijadin</div>
-            </a> <!-- Sidebar - Brand -->
+    <!-- Sidebar - Brand -->
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+        <div class="sidebar-brand-icon rotate-n-15">
+            <i class="fas fa-file-alt"></i>
+        </div>
+        <div class="sidebar-brand-text mx-3">sijadin</div>
+    </a>
 
-    <hr class="sidebar-divider">
+    <hr class="sidebar-divider"> 
 
-            <div class="sidebar-heading">
-                Perjadin saya
-            </div>
+    <!-- QUERY MENU (BASED ON USER ROLE) -->
+    <?php
+        $role_id = $this->session->userdata('roleId');
+        $queryMenu = "SELECT user_menu.id, menu
+                        FROM user_menu
+                        JOIN user_access_menu
+                        ON user_menu.id = user_access_menu.menu_id
+                        WHERE user_access_menu.role_id = $role_id
+                        ORDER BY user_access_menu.menu_id ASC
+                    ";
+        $menu = $this->db->query($queryMenu)->result_array();
+    ?>
 
+    <!-- LOOPING MENU -->
+    <?php foreach ($menu as $m) : ?>
+        <div class="sidebar-heading">
+            <?= $m['menu']; ?>
+        </div>
+
+        <!-- QUERY SUBMENU -->
+        <?php
+            $menuId = $m['id'];
+            $querySubMenu = "SELECT *
+                                FROM user_sub_menu
+                                WHERE menu_id = $menuId
+                                AND is_active = 1
+                            ";
+            $subMenu = $this->db->query($querySubMenu)->result_array();
+        ?>
+
+        <!-- LOOPING SUBMENU -->
+        <?php foreach ($subMenu as $sm) : ?>
             <li class="nav-item">
-                <a class="nav-link" href="<?= site_url('kasie') ?>">
-                    <!-- <i class="fas fa-fw fa-tachometer-alt"></i> -->
-                    <i class="fas fa-fw fa-file"></i>
-                    <span>Perjadin</span>
+                <a class="nav-link" href="<?= base_url($sm['url']); ?>">
+                    <!-- <i class="fas fa-fw fa-file"></i> -->
+                    <i class="<?= $sm['icon']; ?>"></i>
+                    <span><?= $sm['sub_menu_name']; ?></span>
                 </a>
             </li>
-
-    <hr class="sidebar-divider">
-
-            <div class="sidebar-heading">
-                Perjadin pegawai
-            </div>
-
-            <!-- Nav Item -->
-            <li class="nav-item">
-                <a class="nav-link" href="<?= site_url('kasie/input_perjadin') ?>">
-                    <!-- <i class="fas fa-fw fa-chart-area"></i> -->
-                    <i class="fas fa-fw fa-pen-nib"></i>
-                    <span>Input Perjadin</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="<?= site_url('kasie/list_perjadin') ?>">
-                    <!-- <i class="fas fa-fw fa-table"></i> -->
-                    <i class="fas fa-fw fa-list"></i>
-                    <span>List Perjadin</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="<?= site_url('kasie/matriks_perjadin') ?>">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Matriks Perjadin</span>
-                </a>
-            </li>
-
-    <hr class="sidebar-divider">
-
-    <div class="sidebar-heading">
-        Profil
-    </div>
+        <?php endforeach; ?>
+        
+        <hr class="sidebar-divider">
+    <?php endforeach; ?>
 
     <!-- Nav Item - 'Pengaturan' Collapse Menu -->
     <li class="nav-item">
-        <a class="nav-link" href="<?= base_url('kasie/profile') ?>">
+        <!-- <a class="nav-link" href="</?= base_url('kasie/profile') ?>">
             <i class="fas fa-fw fa-user"></i>
             <span>Profil saya</span>
-        </a>
+        </a> -->
         <a class="nav-link" href="<?= base_url('auth/logout') ?>" data-toggle="modal" data-target="#logoutModal">
             <i class="fas fa-fw fa-sign-out-alt"></i>
             <span>Keluar</span>
         </a>                
     </li>
 
-    <hr class="sidebar-divider">
+    <!-- <hr class="sidebar-divider"> -->
 
     <!-- Sidebar Toggler (Sidebar) -->
     <div class="text-center d-none d-md-inline">
