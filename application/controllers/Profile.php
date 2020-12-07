@@ -11,7 +11,7 @@ class Profile extends CI_Controller
 
     public function index()
     {
-        $data['title'] = 'Matriks Perjadin Pegawai';
+        $data['title'] = 'Profile';
         $data['perjadin'] = $this->perjadin_model->getAll();
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         
