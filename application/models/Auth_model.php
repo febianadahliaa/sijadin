@@ -18,17 +18,13 @@ class Auth_model extends CI_Model
                 ];
                 $this->session->set_userdata($data);
                 
-				if ($user['role_id'] == 1) {
-                    // redirect('kasie');
+				if ($user['role_id'] == 1) { //admin
+                    redirect('menu');
+                } elseif ($user['role_id'] == 2) { //kasie
                     redirect('perjadin/list_perjadin');
                 } else {
                     redirect('perjadin_saya');
                 }
-				// } elseif ($user['role_id'] == 2) {
-				// 	redirect('kepala_bps');
-				// } else {
-				// 	redirect('staff_ksk');
-				// }
 			} else {
 				// $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Password salah!</div>');
 				$this->session->set_flashdata('error', 'Password salah!');
