@@ -7,24 +7,27 @@ class Perjadin_model extends CI_Model
 		// $this->db->select('perjadin.idPerjadin, perjadin.nip, perjadin.idKegiatan, perjadin.idAtribut, perjadin.tanggal, kegiatan.idKegiatan, kegiatan.namaKegiatan, atribut.idAtribut, pengguna.nip, pengguna.nama');
 		$this->db->select('*')
 			->from('perjadin')
-			->join('kegiatan', 'perjadin.idKegiatan = kegiatan.idKegiatan')
-			->join('atribut', 'perjadin.idAtribut = atribut.idAtribut')
-			->join('pengguna', 'perjadin.nip = pengguna.nip');
+			->join('activity', 'perjadin.activity_id = activity.id')
+			->join('attribute', 'perjadin.attribute_id = attribute.id')
+			->join('user', 'perjadin.nip = user.nip');
 		$query = $this->db->get();
 		return $query->result();
 	} //ambil semua data hasil join tabel perjadin, kegiatan, atribut, dan pengguna
 
+
+	
+	// ???
+	
 	public function getUser()
 	{
-		return $this->db->get('pengguna');
+		return $this->db->get('user');
 	}
 
 	public function getUserByNip($id)
 	{
-		$query = $this->db->get_where('pengguna', array('nip' => $id));
+		$query = $this->db->get_where('user', array('nip' => $id));
 		return $query;
 	}
-
 
 
 
