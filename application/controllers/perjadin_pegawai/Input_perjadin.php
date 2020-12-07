@@ -14,14 +14,14 @@ class Input_perjadin extends CI_Controller
 
 	public function index()
 	{
-		$data['title'] = 'Input Perjadin Pegawai';
-		$data['data_user'] = $this->perjadin_model->getUser();
+		$data['title'] = 'Input Perjadin';
 		$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+		$data['data_user'] = $this->perjadin_model->getUser();
 
 		$this->load->view('partials_/header', $data);
         $this->load->view('partials_/sidebar', $data);
         $this->load->view('partials_/topbar', $data);
-        $this->load->view('perjadin/input_perjadin', $data);
+        $this->load->view('perjadin_pegawai/input_perjadin', $data);
         $this->load->view('partials_/footer');
 	}
 
