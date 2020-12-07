@@ -19,6 +19,7 @@
                         JOIN user_access_menu
                         ON user_menu.id = user_access_menu.menu_id
                         WHERE user_access_menu.role_id = $role_id
+                        AND user_menu.is_active = 1
                         ORDER BY user_access_menu.menu_id ASC
                     ";
         $menu = $this->db->query($queryMenu)->result_array();
@@ -43,9 +44,12 @@
 
         <!-- LOOPING SUBMENU -->
         <?php foreach ($subMenu as $sm) : ?>
-            <li class="nav-item">
+            <?php if ($title == $sm['sub_menu_name']) : ?>
+                <li class="nav-item active">
+            <?php else : ?>
+                <li class="nav-item">
+            <?php endif; ?>
                 <a class="nav-link" href="<?= base_url($sm['url']); ?>">
-                    <!-- <i class="fas fa-fw fa-file"></i> -->
                     <i class="<?= $sm['icon']; ?>"></i>
                     <span><?= $sm['sub_menu_name']; ?></span>
                 </a>
@@ -55,19 +59,12 @@
         <hr class="sidebar-divider">
     <?php endforeach; ?>
 
-    <!-- Nav Item - 'Pengaturan' Collapse Menu -->
     <li class="nav-item">
-        <!-- <a class="nav-link" href="</?= base_url('kasie/profile') ?>">
-            <i class="fas fa-fw fa-user"></i>
-            <span>Profil saya</span>
-        </a> -->
         <a class="nav-link" href="<?= base_url('auth/logout') ?>" data-toggle="modal" data-target="#logoutModal">
             <i class="fas fa-fw fa-sign-out-alt"></i>
             <span>Keluar</span>
         </a>                
     </li>
-
-    <!-- <hr class="sidebar-divider"> -->
 
     <!-- Sidebar Toggler (Sidebar) -->
     <div class="text-center d-none d-md-inline">
