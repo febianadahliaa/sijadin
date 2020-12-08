@@ -1,5 +1,7 @@
 <?php
 
+defined('BASEPATH') or exit('No direct script access allowed');
+
 class Perjadin_saya extends CI_Controller
 {
 	function __construct()
@@ -11,9 +13,9 @@ class Perjadin_saya extends CI_Controller
 
 	public function index()
 	{
-		$data['title'] = 'Daftar Perjadin Saya';
-		$data['data_perjadin'] = $this->perjadin_model->getAll();
+		$data['title'] = 'Perjadin Saya';
 		$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+		$data['data_perjadin'] = $this->perjadin_model->getAll();
         
         $this->load->view('partials_/header', $data);
         $this->load->view('partials_/sidebar', $data);

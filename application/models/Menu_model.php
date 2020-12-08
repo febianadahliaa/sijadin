@@ -1,8 +1,48 @@
-<?php defined('BASEPATH') or exit('No direct script access allowed');
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Perjadin_model extends CI_Model
+class Menu_model extends CI_Model
 {
-	public function getAll()
+    public function getAll()
+    {
+        return $this->db->get('user_menu')->result_array();
+    }
+
+    public function addMenu()
+    {
+        return $this->db->insert('user_menu', ['menu' => $this->input->post('menu')]);
+    }
+
+    public function getMenuById($id)
+    {
+        return $this->db->get_where('user_menu', ['id' => $id])->row_array();
+    }
+
+    public function editMenu($data, $id)
+    {
+        $this->db->where('id', $id);
+        $this->db->update('user_menu', $data);
+        return true; //BUAT APA?        
+    }
+
+    public function deleteMenu($id)
+	{
+        $this->db->where('id', $id);
+		$this->db->delete('user_menu');
+    }
+    
+
+
+
+
+
+
+
+
+
+
+
+
+	public function getAll_pp()
 	{
 		// $this->db->select('perjadin.idPerjadin, perjadin.nip, perjadin.idKegiatan, perjadin.idAtribut, perjadin.tanggal, kegiatan.idKegiatan, kegiatan.namaKegiatan, atribut.idAtribut, pengguna.nip, pengguna.nama');
 		$this->db->select('*')
@@ -34,49 +74,41 @@ class Perjadin_model extends CI_Model
 
 	private $mytable = 'perjadin';
 
-	public $perjadin_id;
+	public $idPerjadin;
 	public $nip;
-	public $activity_id;
-	public $attribute_id;
-	public $date;
+	public $idKegiatan;
+	public $idAtribut;
+	public $tanggal;
 
 	public function rules()
 	{
-		return [
-			[
-				'filed' => 'nip',
-				'label' => 'Nip',
-				'rules' => 'required'
-			],
+		return[
+			['filed' => 'nip',
+			'label' => 'Nip',
+			'rules' => 'required'],
 
-			[
-				'filed' => 'activity_id',
-				'label' => 'ID Activity',
-				'rules' => 'required'
-			],
+			['filed' => 'idKegiatan',
+			'label' => 'IdKegiatan',
+			'rules' => 'required'],
 
-			[
-				'filed' => 'attribute_id',
-				'label' => 'ID Attribute',
-				'rules' => 'required'
-			],
+			['filed' => 'idAtribut',
+			'label' => 'IdAtribut',
+			'rules' => 'required'],
 
-			[
-				'filed' => 'date',
-				'label' => 'Date',
-				'rules' => 'required'
-			]
+			['filed' => 'tanggal',
+			'label' => 'Tanggal',
+			'rules' => 'required']
 		];
 	} //mengembalikan sebuah array yg berisi rules (untuk validasi input)
 
 	public function getAll_()
 	{
-		return $this->db->get($this->mytable)->result();
+		return $this->db->get($this->mytable)->result(); 
 	} //mengambil semua data dari database (tabel perjadin)
 
 	public function getById($idPerjadin)
 	{
-		return $this->db->get_where($this->mytable, ['id' => $idPerjadin])->row();
+		return $this->db->get_where($this->mytable, ['idPerjadin' => $idPerjadin])->row();
 	} //mengembalikan sebuah objek (yg sesuai dg id)
 
 	public function save()
@@ -101,8 +133,7 @@ class Perjadin_model extends CI_Model
 		return $this->db->update($this->mytable, $this, array('idPerjadin' => $post['idPerjadin']));
 	}
 
-	public function delete($idPerjadin)
-	{
-		return $this->db->delete($this->mytable, array('idPerjadin' => $idPerjadin));
-	}
+	
 }
+
+?>

@@ -1,6 +1,6 @@
 <?php
 
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 class Auth extends CI_Controller
 {
@@ -22,7 +22,7 @@ class Auth extends CI_Controller
 		} else {
 			$data['title'] = 'Login Pengguna';
 			$this->load->view('partials_/auth_header', $data);
-			$this->load->view('login');
+			$this->load->view('auth/login');
 			$this->load->view('partials_/auth_footer');
 		}
 	}

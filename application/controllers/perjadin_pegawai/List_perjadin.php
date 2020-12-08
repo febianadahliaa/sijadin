@@ -14,14 +14,14 @@ class List_perjadin extends CI_Controller
 
 	public function index()
 	{
-		$data['title'] = 'Daftar Perjadin Pegawai';
-		$data['data_perjadin'] = $this->perjadin_model->getAll();
+		$data['title'] = 'List Perjadin';
 		$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+		$data['data_perjadin'] = $this->perjadin_model->getAll();
 
 		$this->load->view('partials_/header', $data);
 		$this->load->view('partials_/sidebar', $data);
 		$this->load->view('partials_/topbar', $data);
-		$this->load->view('perjadin/list_perjadin', $data);
+		$this->load->view('perjadin_pegawai/list_perjadin', $data);
 		$this->load->view('partials_/footer');
 	} //read data
 
