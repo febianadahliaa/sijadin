@@ -1,6 +1,6 @@
 <?php
 
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 class List_perjadin extends CI_Controller
 {
@@ -19,10 +19,10 @@ class List_perjadin extends CI_Controller
 		$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 
 		$this->load->view('partials_/header', $data);
-        $this->load->view('partials_/sidebar', $data);
-        $this->load->view('partials_/topbar', $data);
+		$this->load->view('partials_/sidebar', $data);
+		$this->load->view('partials_/topbar', $data);
 		$this->load->view('perjadin/list_perjadin', $data);
-        $this->load->view('partials_/footer');
+		$this->load->view('partials_/footer');
 	} //read data
 
 	public function edit($idPerjadin = null)
@@ -41,10 +41,10 @@ class List_perjadin extends CI_Controller
 
 		$data['title'] = 'Edit Perjadin Pegawai';
 		$this->load->view('partials_/header', $data);
-        $this->load->view('partials_/sidebar', $data);
-        $this->load->view('partials_/topbar', $data);
+		$this->load->view('partials_/sidebar', $data);
+		$this->load->view('partials_/topbar', $data);
 		$this->load->view('perjadin/edit_perjadin', $data);
-        $this->load->view('partials_/footer');
+		$this->load->view('partials_/footer');
 	}
 
 	public function delete($idPerjadin = null)
@@ -55,6 +55,3 @@ class List_perjadin extends CI_Controller
 		}
 	}
 }
-
-?>
-

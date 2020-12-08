@@ -12,7 +12,7 @@ class Profile extends CI_Controller
     public function index()
     {
         $data['title'] = 'Matriks Perjadin Pegawai';
-        $data['perjadin'] = $this->perjadin_model->getAll();
+        // $data['perjadin'] = $this->perjadin_model->getAll();
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         
         $this->load->view('partials_/header', $data);
@@ -22,5 +22,3 @@ class Profile extends CI_Controller
         $this->load->view('partials_/footer');
     }
 }
-
-?>

@@ -125,6 +125,20 @@
     });
 </script> -->
 
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#dataTable-list').DataTable();
+    });
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#dataTable-saya').DataTable();
+    });
+</script>
+
 </body>
 
 </html>
