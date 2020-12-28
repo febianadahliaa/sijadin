@@ -1,63 +1,76 @@
 <!-- Begin Page Content -->
 <div class="container-fluid">
-	<!-- </?php $this->load->view('kasie/_partials/breadcrumb.php') ?> -->
+	
+	<!-- Page heading -->					
+    <h1 class="h3 mb-4 text-gray-800"><?= $title . ' Pegawai'; ?></h1>
 
-	<!-- Tabel data perjadin -->					
-	<div class="card mb-3">
-		<div class="card-header">
-			<h5>MATRIKS PERJADIN PEGAWAI</h5>	
-		</div>
-		<div class="card-body">
-			<div>
-				<select id="bulan" name="Bulan">
-					<option value="januari">Januari</option>
-					<option value="februari">Februari</option>
-					<option value="maret">Maret</option>
-					<option value="april">April</option>
-					<option value="mei">Mei</option>
-					<option value="juni">Juni</option>
-					<option value="juli">Juli</option>
-					<option value="agustus">Agustus</option>
-					<option value="september">September</option>
-					<option value="oktober">Oktober</option>
-					<option value="november">November</option>
-					<option value="desember">Desember</option>
-				</select>	
-			</div>	
+	<div class="row">
+        <div class="col-lg">
+            
+			<!-- Pilih bulan -->
+			<div class="dropdown">
+				<button class="btn btn-primary btn-sm mb-3 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Bulan</button>
+				<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+					<?php
+					// $month = strtotime(date('Y').'-'.date('m').'-'.date('j').' - 12 months');
+					// $end = strtotime(date('Y').'-'.date('m').'-'.date('j').' + 0 months');
+					// while($month < $end){
+					// 	$selected = (date('n', $month)==date('F'))? ' selected' :'';
+					// 	echo '<option'.$selected.' value="'.date('F', $month).'">'.date('F', $month).'</option>'."\n";
+					// 	$month = strtotime("+1 month", $month);
+					// }
+					?>
+					<a class="dropdown-item" href="#">Action</a>
+					<a class="dropdown-item" href="#">Another action</a>
+					
+				</div>
+			</div>
 			
-			<!-- <div class="table-responsive">
-				<table class="table table-hover" id="dataTable" width="100%" cellspacing="0">
-					<thead>
-						<tr>
-							<th>NIP</th>
-							<th>Nama Pegawai</th>
-							<th>Kode Kegiatan</th>
-							<th>Kegiatan</th>
-							<th>Tanggal</th>
-						</tr>
-					</thead>
-					<tbody>
-						<?php foreach ($perjadin as $row): ?>
-						<tr>
-							<td><?php echo $row->nip ?></td>
-							<td><?php echo $row->nip ?></td>
-							<td><?php echo $row->idKegiatan ?></td>
-							<td><?php echo $row->namaKegiatan ?></td>
-							<td><?php echo $row->tanggal ?></td>
-							
-							<td width="250">
-								<a href="<?php echo site_url('kasie/perjadin_pegawai/edit/'.$row->idPerjadin) ?>"
-									class="btn btn-small"><i class="fas fa-edit"></i> Edit</a>
-								<a onclick="deleteConfirm('<?php echo site_url('kasie/perjadin_pegawai/delete/'.$row->idPerjadin) ?>')"
-									href="#!" class="btn btn-small text-danger"><i class="fas fa-trash"></i> Hapus</a>
-							</td>
-						</tr>
-						<?php endforeach; ?>
 
-					</tbody>
-				</table>
-			</div> -->
-		</div>
-	</div>
+            <!-- Tabel matriks perjadin pegawai -->
+            <table class="table table-responsive">
+                
+				<thead>
+                    <tr>
+                        <th scope="col">Nama</th>
+						<?php for ($day=1; $day <= date('t'); $day++) { ?>
+							<th><?= $day; ?></th>
+						<?php } ?>
+                    </tr>
+                </thead>
+
+                <tbody>
+					<?php $names = array(); ?>
+					<?php foreach ($perjadin as $p) : ?>
+                        <tr>
+							<?php
+								// if (in_array($p['name'], $names)) {
+								// 	continue;
+								// }
+								// $names[] = $p['name'];
+							?>
+                            
+							<td ><?= $p['name']; ?></td>
+																
+							<?php for ($day=1; $day <= date('t'); $day++) { ?>
+								
+								<?php $dates = date('d', strtotime($p['date'])); ?>
+								
+								<?php if ($dates == $day) { ?>
+									<td><?= 'TRUE'; ?></td>
+								<?php } else { ?>
+									<td><?= ''; ?></td>
+								<?php } ?>
+								
+							<?php } ?>
+
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+
+            </table>
+
+        </div>
+    </div>
 
 </div> <!-- /.container-fluid -->
