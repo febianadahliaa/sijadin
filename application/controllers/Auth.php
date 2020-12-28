@@ -7,8 +7,6 @@ class Auth extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->library('form_validation');
-		$this->load->library('session');
 		$this->load->model('auth_model');
 	}
 
@@ -35,9 +33,18 @@ class Auth extends CI_Controller
 		redirect('auth');
 	}
 
+	public function blocked()
+	{
+		$data['title'] = 'Akses ditolak';
+		$data['user'] = $this->auth_model->getUser();
+		
+		$this->load->view('partials_/header', $data);
+        $this->load->view('partials_/sidebar', $data);
+        $this->load->view('partials_/topbar', $data);
+        $this->load->view('auth/blocked');
+        $this->load->view('partials_/footer');
+	}
 
-	
-	// ??? 
 
 	// public function register()
 	// {

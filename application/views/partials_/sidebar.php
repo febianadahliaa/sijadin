@@ -13,7 +13,7 @@
 
     <!-- QUERY MENU (BASED ON USER ROLE) -->
     <?php
-        $role_id = $this->session->userdata('roleId');
+        $role_id = $this->session->userdata('role_id');
         $queryMenu = "SELECT user_menu.id, menu
                         FROM user_menu
                         JOIN user_access_menu
@@ -28,7 +28,7 @@
     <!-- LOOPING MENU -->
     <?php foreach ($menu as $m) : ?>
         <div class="sidebar-heading">
-            <?= $m['menu']; ?>
+            <?= str_replace('_', ' ', $m['menu']); ?>
         </div>
 
         <!-- QUERY SUBMENU -->
