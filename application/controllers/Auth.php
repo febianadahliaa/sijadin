@@ -35,7 +35,7 @@ class Auth extends CI_Controller
 
 	public function blocked()
 	{
-		$data['title'] = 'Akses ditolak';
+		$data['title'] = 'Halaman tidak ditemukan';
 		$data['user'] = $this->auth_model->getUser();
 		
 		$this->load->view('partials_/header', $data);
