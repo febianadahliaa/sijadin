@@ -4,19 +4,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Input_perjadin extends CI_Controller
 {
-	function __construct()
+	public function __construct()
 	{
 		parent::__construct();
+		is_logged_in();
+		$this->load->model('auth_model');
 		$this->load->model('perjadin_model');
-		// $this->load->model('user_model');
-		$this->load->library('form_validation');
 	}
 
 	public function index()
 	{
 		$data['title'] = 'Input Perjadin';
-		$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-		$data['data_user'] = $this->perjadin_model->getUser();
+		$data['user'] = $this->auth_model->getUser();
 
 		$this->load->view('partials_/header', $data);
         $this->load->view('partials_/sidebar', $data);
@@ -42,7 +41,7 @@ class Input_perjadin extends CI_Controller
 			$this->session->set_flashdata('success', 'Data berhasil disimpan');
 		} //jika validasi lancar
 
-		$this->load->view('kasie/input_perjadin');
+		$this->load->view('perjadin_pegawai/input_perjadin');
 	}
 }
 

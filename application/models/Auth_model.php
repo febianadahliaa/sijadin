@@ -11,17 +11,16 @@ class Auth_model extends CI_Model
 		
 		if ($user) {
             if (password_verify($password, $user['password'])) {
-                //Jika berhasil login, maka data yang disimpan dalam session
                 $data = [
                     'email' => $user['email'],
-                    'roleId' => $user['role_id']
-                ];
+                    'role_id' => $user['role_id']
+                ]; //Jika berhasil login, maka data disimpan dalam session
                 $this->session->set_userdata($data);
                 
 				if ($user['role_id'] == 1) { //admin
                     redirect('menu');
                 } elseif ($user['role_id'] == 2) { //kasie
-                    redirect('perjadin/list_perjadin');
+                    redirect('perjadin_pegawai/list_perjadin');
                 } else {
                     redirect('perjadin_saya');
                 }
@@ -36,23 +35,11 @@ class Auth_model extends CI_Model
 		}
 	}
 
-
-    // ??? //
-    
-    public function isNotLogin(){
-        // return $this->session->userdata('user_logged') === null;
-        return $this->session->userdata() === null;
-    }
-
-    // public function cek_login($email)
-    // {
-    //     $hasil = $this->db->where('email', $email)->limit(1)->get('users');
-    //     if ($hasil->run_rows() > 0) {
-    //         return $hasil->row();
-    //     } else {
-    //         return array();
-    //     }
-    // }
+	public function getUser()
+	{
+		$query = $this->db->get_where('user', ['email' => $this->session->userdata('email')]);
+		return $query->row_array();
+	}
 }
 
 ?>

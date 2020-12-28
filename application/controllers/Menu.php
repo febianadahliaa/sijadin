@@ -7,15 +7,15 @@ class Menu extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        // $this->load->library('session');
-        // $this->load->library('form_validation');
+        is_logged_in();
+        $this->load->model('auth_model');
         $this->load->model('menu_model');
     }
 
     public function index()
     {
         $data['title'] = 'Pengaturan Menu';
-        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['user'] = $this->auth_model->getUser();
         $data['menu'] = $this->menu_model->getAll();
         
         $this->load->view('partials_/header', $data);
