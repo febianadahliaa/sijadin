@@ -16,7 +16,34 @@ class Auth extends CI_Controller
 		$this->form_validation->set_rules('password', 'Password', 'trim|required');
 		
 		if ($this->form_validation->run()) {
-			$this->auth_model->login();
+			$email = $this->input->post('email');
+			$password = $this->input->post('password');
+			$user = $this->auth_model->getUserByEmail($email);
+
+			if ($user) {
+				if (password_verify($password, $user['password'])) {
+					$data = [
+						'email' => $user['email'],
+						'role_id' => $user['role_id']
+					]; //Jika berhasil login, maka data disimpan dalam session
+					$this->session->set_userdata($data);
+					
+					if ($user['role_id'] == 1) { //admin
+						redirect('menu');
+					} elseif ($user['role_id'] == 2) { //kasie
+						redirect('perjadin_pegawai/list_perjadin');
+					} else {
+						redirect('perjadin_saya');
+					}
+				} else {
+					// $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Password salah!</div>');
+					$this->session->set_flashdata('error', 'Password salah!');
+					redirect('auth');
+				}
+			} else {
+				$this->session->set_flashdata('error', 'Email tidak terdaftar!');
+				redirect('auth');
+			}
 		} else {
 			$data['title'] = 'Login Pengguna';
 			$this->load->view('partials_/auth_header', $data);
@@ -44,6 +71,43 @@ class Auth extends CI_Controller
         $this->load->view('auth/blocked');
         $this->load->view('partials_/footer');
 	}
+
+	public function changePassword()
+	{
+		$data['title'] = 'Ganti Password';
+		$data['user'] = $this->auth_model->getUser();
+
+		$this->form_validation->set_rules('currentPassword', 'Current Password', 'required|trim');
+		$this->form_validation->set_rules('newPassword1', 'New Password', 'required|trim|min_length[6]|matches[newPassword2]');
+		$this->form_validation->set_rules('newPassword2', 'Confirm New Password', 'required|trim|min_length[6]|matches[newPassword1]');
+		
+		if ($this->form_validation->run() == false) {
+			$this->load->view('partials_/header', $data);
+			$this->load->view('partials_/sidebar', $data);
+			$this->load->view('partials_/topbar', $data);
+			$this->load->view('auth/change-password');
+			$this->load->view('partials_/footer');
+		} else {
+			$current_password = $this->input->post('currentPassword');
+			$new_password = $this->input->post('newPassword1');
+			if (!password_verify($current_password, $data['user']['password'])) {
+				$this->session->set_flashdata('error', 'Password lama salah!');
+				redirect('auth/changePassword');
+			} else {
+				if ($new_password == $current_password) {
+					$this->session->set_flashdata('error', 'Password baru tidak boleh sama dengan password lama!');
+					redirect('auth/changePassword');
+				} else {
+					$password_hash = password_hash($new_password, PASSWORD_DEFAULT);
+					$this->auth_model->updatePassword($password_hash);
+					$this->session->set_flashdata('message', 'Password berhasil diubah!');
+					redirect('auth/changePassword');
+				}
+			}
+		}
+	}
+
+	
 
 
 	// public function register()
