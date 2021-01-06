@@ -23,7 +23,7 @@
 </a>
 
 <!-- Logout Modal-->
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutModalLabel" aria-hidden="true">
+<!-- <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -39,7 +39,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 
 <!-- Bootstrap core JavaScript-->
 <script src="<?= base_url('assets/'); ?>vendor/jquery/jquery.min.js"></script>
@@ -52,10 +52,10 @@
 <script src="<?= base_url('assets/'); ?>js/sb-admin-2.min.js"></script>
 
 <!-- Sweet Alert -->
-<!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script> -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
 <!-- Logout with Sweet Alert -->
-<!-- <script type="text/javascript">
+<script type="text/javascript">
     $(".logout").click(function() {
         Swal.fire({
             titleText: 'Apakah yakin ingin keluar?',
@@ -75,11 +75,11 @@
             }
         });
     });
-</script> -->
+</script>
 
 <!-- Delete with Sweet Alert -->
-<!-- <script type="text/javascript">
-    $(".remove").click(function() {
+<script type="text/javascript">
+    $(".delete").click(function() {
         var id = $(this).parents("tr").attr("id");
 
         Swal.fire({
@@ -96,7 +96,7 @@
         }).then((result) => {
             if (result.isConfirmed) {
                 $.ajax({
-                    url: '<?= base_url() ?>kasie/perjadin_pegawai/delete/' + id,
+                    url: '<?= base_url('perjadin_pegawai/list_perjadin/delete/') ?>' + id,
                     type: 'DELETE',
                     error: function() {
                         Swal.fire('Something is wrong', '', "error");
@@ -114,7 +114,7 @@
                 });
             } else {
                 Swal.fire({
-                    icon: 'error',
+                    icon: 'success',
                     title: 'Data anda aman :)',
                     showConfirmButton: false,
                     allowOutsideClick: false,
@@ -123,7 +123,117 @@
             }
         })
     });
-</script> -->
+</script>
+
+<!-- Autofill Input -->
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#nip').change(function() {
+            var name = $(this).find(':selected').data('name');
+            $('#name').val(name);
+        });
+
+        $('#attribute').change(function() {
+            var id_attr = $(this).find(':selected').val();
+            if (id_attr) {
+                $.ajax({
+                    url: '<?= base_url('perjadin_pegawai/input_perjadin/searchAct/') ?>' + id_attr,
+                    type: 'POST',
+                    success: function(data) {
+                        if (data) {
+                            $('#activity').html(data);
+                        } else {
+                            $('#activity').html('<option value="0"> --Pilih Kegiatan-- </option>');
+                        }
+                    }
+                });
+            }
+        });
+
+        $('#activity').change(function() {
+            var id_attr = $('#attribute').find(':selected').val();
+            var id_act = $(this).find(':selected').val();
+            if (id_act != 0 && id_attr != 0) {
+                $.ajax({
+                    url: '<?= base_url('perjadin_pegawai/input_perjadin/getKode/') ?>' + id_attr + '/' + id_act,
+                    type: 'POST',
+                    success: function(data) {
+                        // var result = $.parseJSON(data);
+                        if (data) {
+                            $('#code').attr('value', data)
+                        } else {
+                            $('#code').attr('value', '-')
+                        }
+                    }
+                });
+            } else {
+                $('#code').attr('value', '-')
+            }
+        });
+    });
+</script>
+
+<!-- Perjadin Saya -->
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#month').change(function() {
+            var month = $(this).find(':selected').val();
+            html = '';
+            if (month.localeCompare('0') != 0) {
+                $.ajax({
+                    url: '<?= base_url('perjadin_saya/filterMonth/') ?>' + month,
+                    type: 'POST',
+                    success: function(data) {
+                        // console.log(data);
+                        if (data.length > 2) {
+                            var result = $.parseJSON(data);
+                            var numb = 1;
+                            $.each(result, function(key, value) {
+                                html += "<tr><td>" + numb + "</td><td>" + value['date'] + "</td><td>" + value['attribute'] + ' ' + value['activity'] + "</td></tr>";
+                                numb += 1;
+                                $('#dataPerSaya').html(html);
+                            })
+                        } else {
+                            html += "<tr> <td class = 'text-center' colspan = '3' > Tidak Ada Perjadin! </td></tr>";
+                            $('#dataPerSaya').html(html);
+                        }
+                    }
+                });
+            } else {
+                $.ajax({
+                    url: '<?= base_url('perjadin_saya/perjadinSaya/') ?>',
+                    type: 'POST',
+                    success: function(data) {
+                        // console.log(data);
+                        if (data.length > 2) {
+                            var result = $.parseJSON(data);
+                            var numb = 1;
+                            $.each(result, function(key, value) {
+                                html += "<tr><td>" + numb + "</td><td>" + value['date'] + "</td><td>" + value['attribute'] + ' ' + value['activity'] + "</td></tr>";
+                                numb += 1;
+                                $('#dataPerSaya').html(html);
+                            })
+                        } else {
+                            html += "<tr> <td class = 'text-center' colspan = '3' > Tidak Ada Perjadin! </td></tr>";
+                            $('#dataPerSaya').html(html);
+                        }
+                    }
+                });
+            }
+        });
+    });
+</script>
+
+<!-- Auto Close Alert -->
+<script type="text/javascript">
+    $(document).ready(function() {
+        window.setTimeout(function() {
+            $(".alert").fadeTo(500, 0).slideUp(500, function() {
+                $(this).remove();
+            });
+        }, 4000);
+    });
+</script>
 
 </body>
 
