@@ -30,7 +30,7 @@
             <ul class="navbar-nav ml-auto">
 
                 <!-- Tombol pencarian yang visible -->
-                <li class="nav-item dropdown no-arrow d-sm-none">
+                <li class="nav-item dropdown no-arrow">
                     <!-- <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fas fa-search fa-fw"></i>
@@ -51,15 +51,18 @@
                             </div>
                         </form>
                     </div> -->
+                    <a class="nav-link dropdown-toggle">
+                        <span class="d-none d-sm-inline text-gray-600 small"><?= $this->session->userdata('pos'); ?></span>
+                    </a>
                 </li>
 
-                <div class="topbar-divider d-none d-sm-block"></div>
+                <div class="ml-0 mr-0 topbar-divider d-none d-sm-block"></div>
 
                 <!-- Nav Item - User Information -->
                 <li class="nav-item dropdown no-arrow">
                     <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?= $user['name']; ?></span>
-                        <img class="img-profile rounded-circle" src="<?php if ($user['gender'] == 'female') echo base_url('assets/img/undraw_profile_1.svg');
+                        <span class="mr-2 d-lg-inline text-gray-600 small"><?= $this->session->userdata('name'); ?></span>
+                        <img class="img-profile rounded-circle" src="<?php if ($this->session->userdata('gender') == 'female') echo base_url('assets/img/undraw_profile_1.svg');
                                                                         else echo base_url('assets/img/undraw_profile_2.svg'); ?>">
                         <!-- <img class="img-profile rounded-circle" src="</?=base_url('assets/img/profile/').$user['image']?>"> -->
                     </a>
@@ -70,7 +73,7 @@
                             <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                             Profil Saya
                         </a> -->
-                        <a class="dropdown-item" href="#">
+                        <a class="dropdown-item" href="<?= base_url('auth/changePassword'); ?>">
                             <i class="fas fa-key fa-sm fa-fw mr-2 text-gray-400"></i>
                             Ganti Password
                         </a>

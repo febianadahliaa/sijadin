@@ -14,59 +14,57 @@
 
 	<div class="card ml-4 mr-4">
 		<div class="card-header">
-			<h5>Daftar perjadin pegawai</h5>
-			<!-- <a href="<?= site_url('perjadin_pegawai/list_perjadin/') ?>"><i class="fas fa-arrow-left"></i> Daftar perjadin pegawai</a> -->
+			<h1 class="h3 text-gray-800"><?= $title; ?></h1>
 		</div>
 
 		<div class="card-body">
-
 			<!-- Form untuk input -->
 			<form action="<?php echo base_url('perjadin_pegawai/input_perjadin/add') ?>" method="post" enctype="multipart/form-data">
 				<div class="form-row">
-					<div class="form-group col-md-3">
-						<label for="nip">NIP</label>
-						<!-- <input class="form-control <?php echo form_error('nip') ? 'is-invalid' : '' ?>" list="daftar_nip_pegawai" type="text" name="nip" id="nip" placeholder="NIP pegawai"> -->
-						<select class="form-control" id='nip' name="nip">
+					<div class="form-group col-lg-3 mb-0">
+						<label class="mt-2" for="nip">NIP</label>
+						<select class="form-control custom-select" id='nip' name="nip">
 							<option value="" selected>--Pilih NIP--</option>
 							<?php foreach ($data_user as $value) { ?>
 								<option value="<?= $value->nip ?>" <?= set_select('nip', $value->nip) ?> data-name='<?= $value->name ?>'><?= $value->nip ?></option>
 							<?php } ?>
 						</select>
-						<?= form_error('nip', '<small class="text-danger pl-3">', '</small>') ?>
 					</div>
 
-					<div class="form-group col-md-5">
-						<label for="nama">Nama Pegawai</label>
+					<div class="form-group col-lg-5 mb-0">
+						<label class="mt-2" for="nama">Nama Pegawai</label>
 						<input class="form-control" type="text" name="name" id='name' placeholder="-" value="<?= set_value('name') ?>" readonly />
+					</div>
+					<div class="form-group col-8">
+						<?= form_error('nip', '<small class="text-danger pl-3">', '</small>') ?>
 					</div>
 				</div>
 
 				<div class="form-row">
-					<div class="form-group col-md-3">
-						<label for="attribute">Atribut</label>
-						<!-- <input class="form-control <?php echo form_error('atribut') ? 'is-invalid' : '' ?>" type="text" name="atribut" list="atribut" placeholder="Atribut kegiatan"> -->
-						<select class="form-control" id="attribute" name="attribute">
+					<div class="form-group col-lg-3 mb-0">
+						<label class="mt-2" for="attribute">Atribut</label>
+						<select class="form-control custom-select" id="attribute" name="attribute">
 							<option value="" selected>--Pilih Atribut--</option>
 							<?php foreach ($data_attr as $value) { ?>
 								<option value="<?= $value->attribute_id ?>" <?= set_select('attribute', $value->attribute_id) ?> data-attribute='<?= $value->attribute ?>'><?= $value->attribute_id . '-' . $value->attribute ?></option>
 							<?php } ?>
 						</select>
-						<?= form_error('activity', '<small class="text-danger pl-3">', '</small>') ?>
 					</div>
-					<div class="form-group col-md-4">
-						<label for="activity">Kegiatan</label>
-						<!-- <input class="form-control <?php echo form_error('kegiatan') ? 'is-invalid' : '' ?>" type="text" name="kegiatan" list="kegiatan" placeholder="Nama kegiatan"> -->
-						<select id="activity" class="form-control" type="text" name="activity">
+					<div class="form-group col-lg-4 mb-0">
+						<label class="mt-2" for="activity">Kegiatan</label>
+						<select class="form-control custom-select" id="activity" type="text" name="activity">
 							<option value="" selected>--Pilih Kegiatan--</option>
 						</select>
 					</div>
-					<div class="form-group col-md-1">
-						<label for="kode">Kode</label>
+					<div class="form-group col-lg-1 mb-0">
+						<label class="mt-2" for="kode">Kode</label>
 						<input class="form-control <?php echo form_error('kode') ? 'is-invalid' : '' ?>" type="text" id="code" name="code" list="code" placeholder="-" readonly />
 						<div class="invalid-feedback"><?php echo form_error('kode') ?></div>
 					</div>
+					<div class="form-group col-8">
+						<?= form_error('activity', '<small class="text-danger pl-3">', '</small>') ?>
+					</div>
 				</div>
-
 				<div class="form-row">
 					<div class="form-group">
 						<label for="tanggal">Tanggal</label>
@@ -75,7 +73,7 @@
 					</div>
 				</div>
 
-				<input class="btn btn-success" type="submit" name="btn" value="Input" />
+				<input class="btn btn-success" type="submit" name="btn" value="Tambahkan" />
 			</form>
 
 			<!-- <script>
@@ -96,9 +94,6 @@
 					});
 				}
 			</script> -->
-
-		</div>
-
-	</div>
-
-</div> <!-- /.container-fluid -->
+		</div> <!-- End .Card-Body -->
+	</div> <!-- End .Card -->
+</div> <!-- End #container-fluid -->

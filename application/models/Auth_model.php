@@ -2,57 +2,26 @@
 
 class Auth_model extends CI_Model
 {
-    public function login()
+    public function getUserByEmail($email)
     {
-        $email = $this->input->post('email');
-        $password = $this->input->post('password');
-
-        $user = $this->db->get_where('user', ['email' => $email])->row_array();
-
-        if ($user) {
-            if (password_verify($password, $user['password'])) {
-                //Jika berhasil login, maka data yang disimpan dalam session
-                $data = [
-                    'email' => $user['email'],
-                    'roleId' => $user['role_id'],
-                    'nip' => $user['nip']
-                ];
-                $this->session->set_userdata($data);
-
-                if ($user['role_id'] == 1) { //admin
-                    redirect('menu');
-                } elseif ($user['role_id'] == 2) { //kasie
-                    redirect('perjadin_pegawai/list_perjadin');
-                } else {
-                    redirect('perjadin_saya');
-                }
-            } else {
-                // $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Password salah!</div>');
-                $this->session->set_flashdata('error', 'Password salah!');
-                redirect('auth');
-            }
-        } else {
-            $this->session->set_flashdata('error', 'Email tidak terdaftar!');
-            redirect('auth');
-        }
+        return $this->db->get_where('user', ['email' => $email])->row_array();
     }
 
-
-    // ??? //
-
-    public function isNotLogin()
+    public function getUser()
     {
-        // return $this->session->userdata('user_logged') === null;
+        $query = $this->db->get_where('user', ['email' => $this->session->userdata('email')]);
+        return $query->row_array();
+    }
+
+    public function updatePassword($password_hash)
+    {
+        $this->db->set('password', $password_hash)
+            ->where('email', $this->session->userdata('email'))
+            ->update('user');
+    }
+
+    public function isLogin()
+    {
         return $this->session->userdata() === null;
     }
-
-    // public function cek_login($email)
-    // {
-    //     $hasil = $this->db->where('email', $email)->limit(1)->get('users');
-    //     if ($hasil->run_rows() > 0) {
-    //         return $hasil->row();
-    //     } else {
-    //         return array();
-    //     }
-    // }
 }

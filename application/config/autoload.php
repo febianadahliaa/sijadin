@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /*
 | -------------------------------------------------------------------
@@ -87,9 +87,9 @@ $autoload['drivers'] = array();
 | -------------------------------------------------------------------
 | Prototype:
 |
-|	$autoload['helper'] = array('url', 'file');
+|	$autoload['helper'] = array('url', 'file'); //'file' -> klo mau upload gambar
 */
-$autoload['helper'] = array('url', 'security'); //'file' -> klo mau upload gambar
+$autoload['helper'] = array('url', 'security', 'access_helper');
 
 /*
 | -------------------------------------------------------------------

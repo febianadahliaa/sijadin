@@ -2,7 +2,7 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?= base_url() ?>">
         <div class="sidebar-brand-icon rotate-n-15">
             <i class="fas fa-file-alt"></i>
         </div>
@@ -70,6 +70,15 @@
         <div class="text-center d-none d-md-inline">
             <button class="rounded-circle border-0" id="sidebarToggle"></button>
         </div>
+
+        <!-- Footer -->
+        <div class="container my-auto" style="margin-bottom: 22px !important;">
+            <hr class="sidebar-divider">
+            <div class="copyright text-center text-white my-auto">
+                <span class="small">Copyright &copy; sijadin <?= date('Y'); ?></span>
+            </div>
+        </div>
+        <!-- End of Footer -->
 
 </ul>
 <!-- End of Sidebar -->

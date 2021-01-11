@@ -7,17 +7,18 @@ class Input_perjadin extends CI_Controller
 	function __construct()
 	{
 		parent::__construct();
+		is_logged_in();
+		$this->load->model('auth_model');
 		$this->load->model('perjadin_model');
-		// $this->load->model('user_model');
 		$this->load->library('form_validation');
 	}
 
 	public function index()
 	{
 		$data['title'] = 'Input Perjadin';
-		$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-		$data['data_user'] = $this->perjadin_model->getUser()->result();
-		$data['data_attr'] = $this->perjadin_model->getAttr()->result();
+		// $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+		$data['data_user'] = $this->perjadin_model->getUser();
+		$data['data_attr'] = $this->perjadin_model->getAttr();
 
 		$this->load->view('partials_/header', $data);
 		$this->load->view('partials_/sidebar', $data);
@@ -35,8 +36,6 @@ class Input_perjadin extends CI_Controller
 
 	public function searchAct($attr_id)
 	{
-		// $data = $this->perjadin_model->getActByAttr($attr_id);
-		// return json_encode($data);
 		echo $this->perjadin_model->getActByAttr($attr_id);
 	}
 
@@ -85,9 +84,8 @@ class Input_perjadin extends CI_Controller
 			redirect('perjadin_pegawai/input_perjadin');
 		} else {
 			$data['title'] = 'Input Perjadin';
-			$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-			$data['data_user'] = $this->perjadin_model->getUser()->result();
-			$data['data_attr'] = $this->perjadin_model->getAttr()->result();
+			$data['data_user'] = $this->perjadin_model->getUser();
+			$data['data_attr'] = $this->perjadin_model->getAttr();
 
 			$this->load->view('partials_/header', $data);
 			$this->load->view('partials_/sidebar', $data);
@@ -95,7 +93,5 @@ class Input_perjadin extends CI_Controller
 			$this->load->view('perjadin_pegawai/input_perjadin', $data);
 			$this->load->view('partials_/footer');
 		}
-
-		// $this->load->view('perjadin_pegawai/input_perjadin');
 	}
 }

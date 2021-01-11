@@ -1,16 +1,53 @@
 <!-- Begin Page Content -->
-<div class="container-fluid">
-    <!-- </?php $this->load->view('kasie/_partials/breadcrumb.php') ?> -->
+<div class="container-fluid px-md-4">
 
-    <!-- Data Tables -->
-    <div class="card mb-3">
+    <!-- Page heading -->
+    <h1 class="h3 mb-4 text-gray-800"><?= $title; ?></h1>
+
+    <div class="row">
+        <div class="col-lg">
+            <div class="table-responsive">
+                <table class="table table-striped" id="perjadinSaya" width="100%" cellspacing="0">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>No.</th>
+                            <th>Tanggal</th>
+                            <th>Kegiatan</th>
+                        </tr>
+                    </thead>
+                    <tbody id="dataPerSaya">
+                        <?php if (gettype($data_perjadin) == 'string') { ?>
+                            <tr>
+                                <td class="text-center" colspan="3">Tidak Ada Perjadin!</td>
+                            </tr>
+                        <?php } else { ?>
+                            <?php foreach ($data_perjadin as $key => $value) : ?>
+                                <tr>
+                                    <td><?= $key + 1 ?></td>
+                                    <td><?= date("d-M-Y", strtotime($value->date)) ?></td>
+                                    <td><?= $value->attribute . ' ' . $value->activity ?></td>
+                                </tr>
+                            <?php endforeach; ?>
+                        <?php } ?>
+                    </tbody>
+                </table>
+            </div>
+            <!-- Ending table-responsive -->
+        </div>
+        <!-- Ending Col -->
+    </div>
+    <!-- Ending Row -->
+</div>
+<!-- Ending Page Content -->
+
+<!-- <div class="card ml-2 mr-2">
         <div class="card-header">
             <h5>DAFTAR PERJADIN SAYA</h5>
         </div>
 
-        <div class="card-body">
-            <div class="row justify-content-start">
-                <div class="col-4 input-group mb-3">
+        <div class="card-body"> -->
+<!-- <div class="row justify-content-start">
+                <div class="col-md-4 input-group mb-3">
                     <div class="input-group-prepend">
                         <label class="input-group-text" for="monthSelect">Bulan</label>
                     </div>
@@ -30,8 +67,8 @@
                         <option value='12'>Desember</option>
                     </select>
                 </div>
-                <div class="col-4 input-group mb-3">
-                    <div class="input-group-prepend ml-3">
+                <div class="col-md-4 input-group mb-3">
+                    <div class="input-group-prepend">
                         <label class="input-group-text" for="monthSelect">Tahun</label>
                     </div>
                     <select class="custom-select" id="month" name="Month">
@@ -40,34 +77,33 @@
                     </select>
                 </div>
             </div>
-            <br>
-            <div></div>
-            <div class="table-responsive">
-                <table class="table table-striped" id="perjadinSaya" width="100%" cellspacing="0">
-                    <thead>
+            <br> -->
+<!-- <div class="table-responsive">
+        <table class="table table-striped" id="perjadinSaya" width="100%" cellspacing="0">
+            <thead class="thead-dark">
+                <tr>
+                    <th>No.</th>
+                    <th>Tanggal</th>
+                    <th>Kegiatan</th>
+                </tr>
+            </thead>
+            <tbody id="dataPerSaya">
+                <?php if (gettype($data_perjadin) == 'string') { ?>
+                    <tr>
+                        <td class="text-center" colspan="3">Tidak Ada Perjadin!</td>
+                    </tr>
+                <?php } else { ?>
+                    <?php foreach ($data_perjadin as $key => $value) : ?>
                         <tr>
-                            <th class="table-dark">No.</th>
-                            <th class="table-dark">Tanggal</th>
-                            <th class="table-dark">Kegiatan</th>
+                            <td><?= $key + 1 ?></td>
+                            <td><?= date("d-M-Y", strtotime($value->date)) ?></td>
+                            <td><?= $value->attribute . ' ' . $value->activity ?></td>
                         </tr>
-                    </thead>
-                    <tbody id="dataPerSaya">
-                        <?php if (gettype($data_perjadin) == 'string') { ?>
-                            <tr>
-                                <td class="text-center" colspan="3">Tidak Ada Perjadin!</td>
-                            </tr>
-                        <?php } else { ?>
-                            <?php foreach ($data_perjadin as $key => $value) : ?>
-                                <tr>
-                                    <td><?= $key + 1 ?></td>
-                                    <td><?= $value->date ?></td>
-                                    <td><?= $value->attribute . ' ' . $value->activity ?></td>
-                                </tr>
-                            <?php endforeach; ?>
-                        <?php } ?>
-                    </tbody>
-                </table>
-            </div> <!-- /.table-responsive -->
-        </div> <!-- /.card-body -->
-    </div>
+                    <?php endforeach; ?>
+                <?php } ?>
+            </tbody>
+        </table>
+    </div> <!-- /.table-responsive 
+</div> <!-- /.card-body 
+</div> 
 </div> <!-- /.container-fluid -->
