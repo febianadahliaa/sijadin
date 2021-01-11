@@ -2,72 +2,71 @@
 
 class Perjadin_model extends CI_Model
 {
+	private $mytable = 'perjadin';
+
 	public function getAll()
 	{
-		// $this->db->select('perjadin.idPerjadin, perjadin.nip, perjadin.idKegiatan, perjadin.idAtribut, perjadin.tanggal, kegiatan.idKegiatan, kegiatan.namaKegiatan, atribut.idAtribut, pengguna.nip, pengguna.nama');
-		$this->db->select('*')
-			->from('perjadin')
-			->join('activity', 'perjadin.activity_id = activity.id')
-			->join('attribute', 'perjadin.attribute_id = attribute.id')
-			->join('user', 'perjadin.nip = user.nip');
-		$query = $this->db->get();
+		$query = $this->db->join('activity_code', 'perjadin.activity_code = activity_code.activity_code')
+			->join('activity', 'activity_code.activity_id = activity.activity_id')
+			->join('attribute', 'activity_code.attribute_id = attribute.attribute_id')
+			->join('user', 'perjadin.nip = user.nip')
+			->get($this->mytable);
 		return $query->result();
 	} //ambil semua data hasil join tabel perjadin, kegiatan, atribut, dan pengguna
 
+	public function getMaxMinYear()
+	{
+		return $this->db->query('SELECT MIN(date) as min,MAX(date) as max FROM ' . $this->mytable)
+			->result();
+	}
 
-	
-	// ???
-	
 	public function getUser()
 	{
-		return $this->db->get('user');
+		return $this->db->get('user')->result();
+	}
+
+	public function getAttr()
+	{
+		return $this->db->get('attribute')->result();
+	}
+
+	public function getMatrixByMonth($year, $month)
+	{
+		return $this->db->select('perjadin.nip, name, perjadin_id, activity_code, date')
+			->join('user', 'perjadin.nip = user.nip', 'right')
+			->like('date', $year . '-' . $month . '-')
+			->get($this->mytable)->result();
+	}
+
+	public function getByNip($nip)
+	{
+		return $this->db->join('activity_code', 'perjadin.activity_code = activity_code.activity_code')
+			->join('attribute', 'activity_code.attribute_id = attribute.attribute_id')
+			->join('activity', 'activity_code.activity_id = activity.activity_id')
+			->get_where($this->mytable, ['nip' => $nip])->result();
+	}
+
+	public function getActByAttr($attr_id)
+	{
+		$query = $this->db->join('activity', 'activity_code.activity_id = activity.activity_id')
+			->get_where('activity_code', ['attribute_id' => $attr_id]);
+		$output = '<option value="">--Pilih Kegiatan--</option>';
+		foreach ($query->result() as $row) {
+			$output .= '<option value="' . $row->activity_id . '">' . $row->activity_id . '-' . $row->activity . '</option>';
+		}
+		return $output;
+	}
+
+	public function getKode($attr_id, $act_id)
+	{
+		return $this->db->select('activity_code')
+			->get_where('activity_code', ['attribute_id' => $attr_id, 'activity_id' => $act_id])->row();
 	}
 
 	public function getUserByNip($id)
 	{
-		$query = $this->db->get_where('user', array('nip' => $id));
-		return $query;
+		return $this->db->get_where('user', array('nip' => $id));
 	}
-
-
-
-
-	private $mytable = 'perjadin';
-
-	public $perjadin_id;
-	public $nip;
-	public $activity_id;
-	public $attribute_id;
-	public $date;
-
-	public function rules()
-	{
-		return [
-			[
-				'filed' => 'nip',
-				'label' => 'Nip',
-				'rules' => 'required'
-			],
-
-			[
-				'filed' => 'activity_id',
-				'label' => 'ID Activity',
-				'rules' => 'required'
-			],
-
-			[
-				'filed' => 'attribute_id',
-				'label' => 'ID Attribute',
-				'rules' => 'required'
-			],
-
-			[
-				'filed' => 'date',
-				'label' => 'Date',
-				'rules' => 'required'
-			]
-		];
-	} //mengembalikan sebuah array yg berisi rules (untuk validasi input)
 
 	public function getAll_()
 	{
@@ -76,33 +75,47 @@ class Perjadin_model extends CI_Model
 
 	public function getById($idPerjadin)
 	{
-		return $this->db->get_where($this->mytable, ['id' => $idPerjadin])->row();
+		return $this->db->join('activity_code', 'perjadin.activity_code = activity_code.activity_code')
+			->join('activity', 'activity_code.activity_id = activity.activity_id')
+			->join('attribute', 'activity_code.attribute_id = attribute.attribute_id')
+			->join('user', 'perjadin.nip = user.nip')
+			->select('perjadin_id, user.nip, activity_code.activity_code, date, activity_code.attribute_id, activity_code.activity_id, activity, attribute')
+			->get_where($this->mytable, ['perjadin_id' => $idPerjadin])->row();
 	} //mengembalikan sebuah objek (yg sesuai dg id)
 
-	public function save()
+	public function insert()
 	{
-		$post = $this->input->post(); //mengambil input yg dikirim dari form
-		$this->idPerjadin = uniqid();
-		$this->nip = $post['nip'];
-		$this->idKegiatan = $post['idKegiatan'];
-		$this->namaKegiatan = $post['namaKegiatan'];
-		$this->tanggal = $post['tanggal'];
-		return $this->db->insert($this->mytable, $this); //menyimpan data ke db
+		$nip = $this->input->post('nip');
+		$code = $this->input->post('code');
+		$date = $this->input->post('date');
+
+		$data = array(
+			'perjadin_id' => uniqid(),
+			'nip' => $nip,
+			'activity_code' => $code,
+			'date' => $date
+		);
+
+		return $this->db->insert($this->mytable, $data);
 	}
 
 	public function update()
 	{
-		$post = $this->input->post();
-		$this->idPerjadin = $post['idPerjadin'];
-		$this->nip = $post['nip'];
-		$this->idKegiatan = $post['idKegiatan'];
-		$this->namaKegiatan = $post['namaKegiatan'];
-		$this->tanggal = $post['tanggal'];
-		return $this->db->update($this->mytable, $this, array('idPerjadin' => $post['idPerjadin']));
+		$perjadin_id = $this->input->post('perjadin_id');
+		$nip = $this->input->post('nip');
+		$code = $this->input->post('code');
+		$date = $this->input->post('date');
+
+		$data = array(
+			'nip' => $nip,
+			'activity_code' => $code,
+			'date' => $date
+		);
+		return $this->db->update($this->mytable, $data, ['perjadin_id' => $perjadin_id]);
 	}
 
 	public function delete($idPerjadin)
 	{
-		return $this->db->delete($this->mytable, array('idPerjadin' => $idPerjadin));
+		return $this->db->delete($this->mytable, ['perjadin_id' => $idPerjadin]);
 	}
 }

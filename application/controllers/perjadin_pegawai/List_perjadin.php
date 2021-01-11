@@ -7,15 +7,18 @@ class List_perjadin extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
+		is_logged_in();
+		$this->load->model('auth_model');
 		$this->load->model('perjadin_model');
 		$this->load->library('form_validation');
-		// if($this->kasie_model->isNotLogin()) redirect(site_url('kasie/login'));
 	}
 
 	public function index()
 	{
-		$data['title'] = 'List Perjadin';
-		$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+		$data['title'] = 'Daftar Perjadin Pegawai';
+		// $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+		$data['data_user'] = $this->perjadin_model->getUser();
+		$data['data_attr'] = $this->perjadin_model->getAttr();
 		$data['data_perjadin'] = $this->perjadin_model->getAll();
 
 		$this->load->view('partials_/header', $data);
@@ -25,33 +28,59 @@ class List_perjadin extends CI_Controller
 		$this->load->view('partials_/footer');
 	} //read data
 
-	public function edit($idPerjadin = null)
+	public function edit()
 	{
-		$data['perjadin'] = $this->perjadin_model->getAll();
-		if (!isset($idPerjadin)) redirect('kasie/perjadin_pegawai');
+		// $data['perjadin'] = $this->perjadin_model->getById($idPerjadin);
+		// if (!isset($idPerjadin)) redirect(site_url('perjadin_pegawai/list_perjadin'));
 
-		$perjadin = $this->perjadin_model;
-		$validation = $this->form_validation;
-		$validation->set_rules($perjadin->rules());
+		$config = [
+			[
+				'field' => 'nip',
+				'label' => 'NIP',
+				'rules' => 'required',
+				'errors' => [
+					'required' => 'NIP belum dipilih'
+				],
+			],
+			[
+				'field' => 'activity',
+				'label' => 'Kegiatan',
+				'rules' => 'required',
+				'errors' => [
+					'required' => 'Jenis Kegiatan belum dipilih'
+				],
+			],
+			[
+				'field' => 'date',
+				'label' => 'Tanggal',
+				'rules' => 'required',
+				'errors' => [
+					'required' => 'Tanggal belum dipilih'
+				],
+			],
+		];
+		$this->form_validation->set_rules($config);
 
-		if ($validation->run()) {
-			$perjadin->update();
-			$this->session->set_flashdata('success', 'Data berhasil disimpan');
+		if ($this->form_validation->run()) {
+			if ($this->perjadin_model->update()) { //update data
+				$this->session->set_flashdata('success', 'Data berhasil disimpan');
+				redirect(site_url('perjadin_pegawai/list_perjadin'));
+			}
 		}
 
-		$data['title'] = 'Edit Perjadin Pegawai';
-		$this->load->view('partials_/header', $data);
-		$this->load->view('partials_/sidebar', $data);
-		$this->load->view('partials_/topbar', $data);
-		$this->load->view('perjadin/edit_perjadin', $data);
-		$this->load->view('partials_/footer');
+		// $data['title'] = 'Edit Perjadin Pegawai';
+		// $this->load->view('partials_/header', $data);
+		// $this->load->view('partials_/sidebar', $data);
+		// $this->load->view('partials_/topbar', $data);
+		// $this->load->view('perjadin/edit_perjadin', $data);
+		// $this->load->view('partials_/footer');
 	}
 
-	public function delete($idPerjadin = null)
+	public function delete($idPerjadin)
 	{
 		if (!isset($idPerjadin)) show_404();
 		if ($this->perjadin_model->delete($idPerjadin)) {
-			redirect(site_url('kasie/perjadin_pegawai'));
+			redirect(site_url('perjadin_pegawai/list_perjadin'));
 		}
 	}
 }

@@ -7,22 +7,39 @@ class Perjadin_saya extends CI_Controller
 	function __construct()
 	{
 		parent::__construct();
+		is_logged_in();
+		$this->load->model('auth_model');
 		$this->load->model('perjadin_model');
-		//if($this->kasie_model->isNotLogin()) redirect(site_url('kasie/login'));
 	}
 
 	public function index()
 	{
-		$data['title'] = 'Perjadin Saya';
+		$data['title'] = 'Daftar Perjadin Saya';
 		$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-		$data['data_perjadin'] = $this->perjadin_model->getAll();
-        
-        $this->load->view('partials_/header', $data);
-        $this->load->view('partials_/sidebar', $data);
-        $this->load->view('partials_/topbar', $data);
-        $this->load->view('perjadin_saya/index', $data);
-        $this->load->view('partials_/footer');
+		if ($this->perjadin_model->getByNip($this->session->userdata('nip'))) {
+			$data['data_perjadin'] = $this->perjadin_model->getByNip($this->session->userdata('nip'));
+		} else {
+			$data['data_perjadin'] = 'Tidak Ada Perjadin!';
+		}
+
+		$this->load->view('partials_/header', $data);
+		$this->load->view('partials_/sidebar', $data);
+		$this->load->view('partials_/topbar', $data);
+		$this->load->view('perjadin_saya/index', $data);
+		$this->load->view('partials_/footer');
 	}
+
+	// public function filterMonth($month)
+	// {
+	// 	$q = $this->perjadin_model->getMyPerjadinByMonth($this->session->userdata('nip'), $month);
+	// 	echo json_encode($q);
+	// }
+
+	// public function perjadinSaya()
+	// {
+	// 	$q = $this->perjadin_model->getByNip($this->session->userdata('nip'));
+	// 	echo json_encode($q);
+	// }
 
 	// public function edit($idPerjadin = null)
 	// {
@@ -39,10 +56,10 @@ class Perjadin_saya extends CI_Controller
 	// 	}
 
 	// 	$this->load->view('partials_/header', $data);
-    //     $this->load->view('partials_/sidebar', $data);
-    //     $this->load->view('partials_/topbar', $data);
-    //     $this->load->view('kasie/edit_perjadin', $data);
-    //     $this->load->view('partials_/footer');
+	//     $this->load->view('partials_/sidebar', $data);
+	//     $this->load->view('partials_/topbar', $data);
+	//     $this->load->view('kasie/edit_perjadin', $data);
+	//     $this->load->view('partials_/footer');
 	// }
 
 	// public function delete($idPerjadin = null)
@@ -53,5 +70,3 @@ class Perjadin_saya extends CI_Controller
 	// 	}
 	// }
 }
-
-?>
