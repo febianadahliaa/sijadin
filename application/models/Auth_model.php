@@ -4,7 +4,12 @@ class Auth_model extends CI_Model
 {
     public function getUserByEmail($email)
     {
-        return $this->db->get_where('user', ['email' => $email])->row_array();
+        $query = $this->db->select('user.*, user_position.position')
+            ->from('user')
+            ->where('email', $email)
+            ->join('user_position', 'user.position_id = user_position.id', 'Left')
+            ->get();
+        return $query->row_array();
     }
 
     public function getUser()

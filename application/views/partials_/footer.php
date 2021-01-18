@@ -41,7 +41,7 @@
     </div>
 </div> -->
 
-<!-- Edit modal -->
+<!-- Edit Perjadin modal -->
 <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -108,10 +108,39 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <input class="btn btn-success" type="submit" name="btn" value="Simpan" />
+                    <input class="btn btn-primary" type="submit" name="btn" value="Simpan" />
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Batalkan</button>
                 </div>
             </form>
+        </div>
+    </div>
+</div>
+
+<!-- Reset Password User Modal -->
+<div class="modal fade" id="resetPasswordModal" tabindex="-1" aria-labelledby="resetPasswordModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header card-header">
+                <h3 class="modal-title h3 text-gray-800" id="resetPasswordModalLabel">Reset Password Pegawai</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+
+            <form action="<?= base_url('manajemen/pegawai/resetPassword') ?>" method="post" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Masukkan password baru">
+                        <?= form_error('password', '<small class="text-danger pl-3">', '</small>') ?>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input class="btn btn-primary" type="submit" name="btn" value="Ganti Password" />
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Batalkan</button>
+
+                    <!-- <button type="submit" class="btn btn-primary">Ganti Password</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button> -->
+                </div>
+            </form>
+
         </div>
     </div>
 </div>
@@ -152,13 +181,13 @@
     });
 </script>
 
-<!-- Delete with Sweet Alert -->
+<!-- Delete Perjadin Data with Sweet Alert -->
 <script type="text/javascript">
     $(".delete").click(function() {
         var id = $(this).parents("tr").attr("id");
 
         Swal.fire({
-            title: 'Apakah anda yakin?',
+            title: 'Apakah Anda yakin?',
             text: "Data yang dihapus tidak akan bisa dikembalikan!",
             icon: 'warning',
             showCancelButton: true,
@@ -180,7 +209,7 @@
                         $("#" + id).remove();
                         Swal.fire({
                             icon: 'success',
-                            title: 'Perjadin berhasil dihapus!',
+                            title: 'Data perjadin berhasil dihapus!',
                             showConfirmButton: false,
                             allowOutsideClick: false,
                             timer: 1500
@@ -193,7 +222,211 @@
             } else {
                 Swal.fire({
                     icon: 'success',
-                    title: 'Data anda aman ✧◝(⁰▿⁰)◜✧',
+                    title: 'Data Anda aman ✧◝(⁰▿⁰)◜✧',
+                    showConfirmButton: false,
+                    allowOutsideClick: false,
+                    timer: 1500
+                })
+            }
+        })
+    });
+</script>
+
+<!-- Delete User Data with Sweet Alert -->
+<script type="text/javascript">
+    $(".deleteUser").click(function() {
+        var id = $(this).parents("tr").attr("id");
+
+        Swal.fire({
+            title: 'Apakah Anda yakin?',
+            text: "Data yang dihapus tidak akan bisa dikembalikan!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonClass: "btn-danger",
+            confirmButtonText: "Hapus",
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            cancelButtonText: "Batalkan",
+            allowOutsideClick: false
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: '<?= base_url('manajemen/pegawai/delete/') ?>' + id,
+                    type: 'DELETE',
+                    error: function() {
+                        Swal.fire('Something is wrong', '', "error");
+                    },
+                    success: function(data) {
+                        $("#" + id).remove();
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Data pegawai berhasil dihapus!',
+                            showConfirmButton: false,
+                            allowOutsideClick: false,
+                            timer: 1500
+                        })
+                        setTimeout(function() {
+                            location.reload();
+                        }, 1400);
+                    }
+                });
+            } else {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Data Anda aman ✧◝(⁰▿⁰)◜✧',
+                    showConfirmButton: false,
+                    allowOutsideClick: false,
+                    timer: 1500
+                })
+            }
+        })
+    });
+</script>
+
+<!-- Delete Attribute Data with Sweet Alert -->
+<script type="text/javascript">
+    $(".deleteAttr").click(function() {
+        var id = $(this).parents("tr").attr("id");
+
+        Swal.fire({
+            title: 'Apakah Anda yakin?',
+            text: "Data yang dihapus tidak akan bisa dikembalikan!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonClass: "btn-danger",
+            confirmButtonText: "Hapus",
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            cancelButtonText: "Batalkan",
+            allowOutsideClick: false
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: '<?= base_url('manajemen/kegiatan/delAttr/') ?>' + id,
+                    type: 'DELETE',
+                    error: function() {
+                        Swal.fire('Something is wrong', '', "error");
+                    },
+                    success: function(data) {
+                        $("#" + id).remove();
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Data atribut kegiatan berhasil dihapus!',
+                            showConfirmButton: false,
+                            allowOutsideClick: false,
+                            timer: 1500
+                        })
+                        setTimeout(function() {
+                            location.reload();
+                        }, 1400);
+                    }
+                });
+            } else {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Data Anda aman ✧◝(⁰▿⁰)◜✧',
+                    showConfirmButton: false,
+                    allowOutsideClick: false,
+                    timer: 1500
+                })
+            }
+        })
+    });
+</script>
+
+<!-- Delete Original Activity Data with Sweet Alert -->
+<script type="text/javascript">
+    $(".deleteOriAct").click(function() {
+        var id = $(this).parents("tr").attr("id");
+
+        Swal.fire({
+            title: 'Apakah Anda yakin?',
+            text: "Data yang dihapus tidak akan bisa dikembalikan!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonClass: "btn-danger",
+            confirmButtonText: "Hapus",
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            cancelButtonText: "Batalkan",
+            allowOutsideClick: false
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: '<?= base_url('manajemen/kegiatan/delOriAct/') ?>' + id,
+                    type: 'DELETE',
+                    error: function() {
+                        Swal.fire('Something is wrong', '', "error");
+                    },
+                    success: function(data) {
+                        $("#" + id).remove();
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Data kegiatan origin berhasil dihapus!',
+                            showConfirmButton: false,
+                            allowOutsideClick: false,
+                            timer: 1500
+                        })
+                        setTimeout(function() {
+                            location.reload();
+                        }, 1400);
+                    }
+                });
+            } else {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Data Anda aman ✧◝(⁰▿⁰)◜✧',
+                    showConfirmButton: false,
+                    allowOutsideClick: false,
+                    timer: 1500
+                })
+            }
+        })
+    });
+</script>
+
+<!-- Delete Activity Data with Sweet Alert -->
+<script type="text/javascript">
+    $(".deleteAct").click(function() {
+        var id = $(this).parents("tr").attr("id");
+
+        Swal.fire({
+            title: 'Apakah Anda yakin?',
+            text: "Data yang dihapus tidak akan bisa dikembalikan!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonClass: "btn-danger",
+            confirmButtonText: "Hapus",
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            cancelButtonText: "Batalkan",
+            allowOutsideClick: false
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: '<?= base_url('manajemen/kegiatan/delAct/') ?>' + id,
+                    type: 'DELETE',
+                    error: function() {
+                        Swal.fire('Something is wrong', '', "error");
+                    },
+                    success: function(data) {
+                        $("#" + id).remove();
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Data kegiatan berhasil dihapus!',
+                            showConfirmButton: false,
+                            allowOutsideClick: false,
+                            timer: 1500
+                        })
+                        setTimeout(function() {
+                            location.reload();
+                        }, 1400);
+                    }
+                });
+            } else {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Data Anda aman ✧◝(⁰▿⁰)◜✧',
                     showConfirmButton: false,
                     allowOutsideClick: false,
                     timer: 1500
@@ -408,6 +641,17 @@
 <script type="text/javascript">
     $(document).ready(function() {
         $('#perjadinSaya').DataTable({
+            "lengthMenu": [
+                [+5, 10, 25, 50, -1],
+                [5, 10, 25, 50, "All"]
+            ],
+        });
+    });
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.dataTable-management').DataTable({
             "lengthMenu": [
                 [+5, 10, 25, 50, -1],
                 [5, 10, 25, 50, "All"]

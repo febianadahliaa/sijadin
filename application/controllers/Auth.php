@@ -36,7 +36,7 @@ class Auth extends CI_Controller
 					$this->session->set_userdata($data);
 
 					if ($user['role_id'] == 1) { //admin
-						redirect('menu');
+						redirect('manajemen/pegawai');
 					} elseif ($user['role_id'] == 2) { //kasie
 						redirect('perjadin_pegawai/list_perjadin');
 					} else {
