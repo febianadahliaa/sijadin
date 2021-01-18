@@ -7,6 +7,14 @@
 
 	<div class="row">
 		<div class="col-lg">
+			<?php
+			if ($this->session->flashdata('success') != '') {
+				echo '<div class="alert alert-success" role="alert">';
+				echo $this->session->flashdata('success');
+				echo '</div>';
+			}
+			?>
+
 			<div class="table-responsive">
 				<table class="table table-hover" id="dataTable-list" width="100%" cellspacing="0">
 					<thead class="thead-dark">
@@ -29,8 +37,8 @@
 								<td class="attribute" data-attribute="<?= $nilai->attribute ?>" data-activity="<?= $nilai->activity_id ?>"><?= $nilai->attribute . ' ' . $nilai->activity ?></td>
 								<td class="date text-center" data-date="<?= $nilai->date ?>"><?= date("d-M-Y", strtotime($nilai->date)) ?></td>
 								<td class="action text-center" width="250">
-									<a class="btn btn-sm open-edit-dialog" data-id="<?= $nilai->perjadin_id ?>" data-toggle="modal" data-target="#editModal"><i class="fas fa-edit"></i> Edit</a>
-									<a href="<?= base_url('perjadin_pegawai/list_perjadin/delete/' . $nilai->perjadin_id) ?>" class="btn btn-sm text-danger delete" data-toggle="modal" data-target="#deleteModal"><i class="fas fa-trash"></i> Hapus</a>
+									<a href="" class="badge badge-pill badge-primary mr-1 open-edit-dialog" data-id="<?= $nilai->perjadin_id ?>" data-toggle="modal" data-target="#editModal">Edit</a>
+									<a href="<?= base_url('perjadin_pegawai/list_perjadin/delete/' . $nilai->perjadin_id) ?>" class="badge badge-pill badge-danger delete" data-toggle="modal" data-target="#deleteModal">Hapus</a>
 								</td>
 							</tr>
 						<?php endforeach; ?>

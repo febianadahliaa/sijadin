@@ -28,7 +28,7 @@
     <!-- LOOPING MENU -->
     <?php foreach ($menu as $m) : ?>
         <div class="sidebar-heading">
-            <?= $m['menu']; ?>
+            <?= str_replace('_', ' ', $m['menu']); ?>
         </div>
 
         <!-- QUERY SUBMENU -->
@@ -44,19 +44,19 @@
 
         <!-- LOOPING SUBMENU -->
         <?php foreach ($subMenu as $sm) : ?>
-            <?php if ($title == $sm['sub_menu_name']) : ?>
+            <?php if ($subMenuName == $sm['sub_menu_name']) : ?>
                 <li class="nav-item active">
                 <?php else : ?>
                 <li class="nav-item">
                 <?php endif; ?>
-                <a class="nav-link" href="<?= base_url($sm['url']); ?>">
+                <a class="nav-link pb-0" href="<?= base_url($sm['url']); ?>">
                     <i class="<?= $sm['icon']; ?>"></i>
                     <span><?= $sm['sub_menu_name']; ?></span>
                 </a>
                 </li>
             <?php endforeach; ?>
 
-            <hr class="sidebar-divider">
+            <hr class="sidebar-divider mt-3">
         <?php endforeach; ?>
 
         <li class="nav-item">

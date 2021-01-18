@@ -15,6 +15,7 @@ class Matriks_perjadin extends CI_Controller
     public function index()
     {
         $data['title'] = 'Matriks Perjadin Pegawai';
+        $data['subMenuName'] = 'Matriks Perjadin';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['perjadin'] = $this->perjadin_model->getAll();
         $data['maxMinYear'] = $this->perjadin_model->getMaxMinYear();

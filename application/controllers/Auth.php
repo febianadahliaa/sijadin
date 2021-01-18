@@ -14,8 +14,26 @@ class Auth extends CI_Controller
 
 	public function index()
 	{
-		$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
-		$this->form_validation->set_rules('password', 'Password', 'trim|required');
+		$config = [
+			[
+				'field' => 'email',
+				'label' => 'Email',
+				'rules' => 'trim|required|valid_email',
+				'errors' => [
+					'required' => 'Email harus diisi!',
+					'valid_email' => 'Email tidak valid!'
+				]
+			],
+			[
+				'field' => 'password',
+				'label' => 'Password',
+				'rules' => 'trim|required',
+				'errors' => [
+					'required' => 'Password harus diisi!'
+				]
+			]
+		];
+		$this->form_validation->set_rules($config);
 
 		if ($this->form_validation->run()) {
 			$email = $this->input->post('email');
@@ -36,7 +54,7 @@ class Auth extends CI_Controller
 					$this->session->set_userdata($data);
 
 					if ($user['role_id'] == 1) { //admin
-						redirect('menu');
+						redirect('manajemen/pegawai');
 					} elseif ($user['role_id'] == 2) { //kasie
 						redirect('perjadin_pegawai/list_perjadin');
 					} else {
@@ -63,7 +81,7 @@ class Auth extends CI_Controller
 		$this->session->unset_userdata('email');
 		$this->session->unset_userdata('roleId');
 		$this->session->unset_userdata('nip');
-		$this->session->unset_userdata('position');
+		$this->session->unset_userdata('pos');
 		$this->session->unset_userdata('name');
 		$this->session->unset_userdata('gender');
 
@@ -73,7 +91,8 @@ class Auth extends CI_Controller
 
 	public function blocked()
 	{
-		$data['title'] = 'Halaman tidak ditemukan';
+		$data['title'] = 'Akses Tidak Diizinkan';
+		$data['subMenuName'] = '';
 		$data['user'] = $this->auth_model->getUser();
 
 		$this->load->view('partials_/header', $data);
