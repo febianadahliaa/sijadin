@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.3
+-- version 4.9.5
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Dec 07, 2020 at 09:43 AM
--- Server version: 10.4.14-MariaDB
--- PHP Version: 7.4.11
+-- Host: localhost:3306
+-- Generation Time: Jan 12, 2021 at 07:32 AM
+-- Server version: 10.3.16-MariaDB
+-- PHP Version: 7.3.23
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -18,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `sijadin`
+-- Database: `id10559296_sijadin`
 --
 
 -- --------------------------------------------------------
@@ -28,7 +29,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `activity` (
-  `id` varchar(3) NOT NULL,
+  `activity_id` varchar(3) NOT NULL,
   `activity` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -36,7 +37,7 @@ CREATE TABLE `activity` (
 -- Dumping data for table `activity`
 --
 
-INSERT INTO `activity` (`id`, `activity`) VALUES
+INSERT INTO `activity` (`activity_id`, `activity`) VALUES
 ('A01', 'KSA padi'),
 ('A02', 'Survei ubinan');
 
@@ -47,7 +48,7 @@ INSERT INTO `activity` (`id`, `activity`) VALUES
 --
 
 CREATE TABLE `activity_code` (
-  `id` varchar(4) NOT NULL,
+  `activity_code` varchar(4) NOT NULL,
   `attribute_id` varchar(3) NOT NULL,
   `activity_id` varchar(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -56,9 +57,10 @@ CREATE TABLE `activity_code` (
 -- Dumping data for table `activity_code`
 --
 
-INSERT INTO `activity_code` (`id`, `attribute_id`, `activity_id`) VALUES
+INSERT INTO `activity_code` (`activity_code`, `attribute_id`, `activity_id`) VALUES
 ('K001', 'P01', 'A02'),
-('K002', 'P03', 'A02');
+('K002', 'P03', 'A02'),
+('K003', 'P01', 'A01');
 
 -- --------------------------------------------------------
 
@@ -67,7 +69,7 @@ INSERT INTO `activity_code` (`id`, `attribute_id`, `activity_id`) VALUES
 --
 
 CREATE TABLE `attribute` (
-  `id` varchar(3) NOT NULL,
+  `attribute_id` varchar(3) NOT NULL,
   `attribute` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -75,7 +77,7 @@ CREATE TABLE `attribute` (
 -- Dumping data for table `attribute`
 --
 
-INSERT INTO `attribute` (`id`, `attribute`) VALUES
+INSERT INTO `attribute` (`attribute_id`, `attribute`) VALUES
 ('P01', 'Pengawasan'),
 ('P02', 'Pencacahan'),
 ('P03', 'Listing');
@@ -87,10 +89,9 @@ INSERT INTO `attribute` (`id`, `attribute`) VALUES
 --
 
 CREATE TABLE `perjadin` (
-  `id` int(11) NOT NULL,
+  `perjadin_id` varchar(13) NOT NULL,
   `nip` varchar(9) NOT NULL,
-  `attribute_id` varchar(3) NOT NULL,
-  `activity_id` varchar(3) NOT NULL,
+  `activity_code` varchar(4) NOT NULL,
   `date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -98,10 +99,20 @@ CREATE TABLE `perjadin` (
 -- Dumping data for table `perjadin`
 --
 
-INSERT INTO `perjadin` (`id`, `nip`, `attribute_id`, `activity_id`, `date`) VALUES
-(1, '340018309', 'P01', 'A02', '2020-11-24'),
-(2, '340018309', 'P01', 'A02', '2020-11-24'),
-(3, '340000001', 'P03', 'A02', '2020-11-30');
+INSERT INTO `perjadin` (`perjadin_id`, `nip`, `activity_code`, `date`) VALUES
+('5ff408fc9cd03', '340018309', 'K003', '2021-01-05'),
+('5ff409288742e', '999060218', 'K003', '2021-02-02'),
+('5ff410f2e6b43', '340018309', 'K002', '2021-02-10'),
+('5ff447d689579', '340013647', 'K002', '2021-01-15'),
+('5ff447f76fd84', '340000002', 'K001', '2021-01-26'),
+('5ff5f2981f0d5', '340018309', 'K002', '2021-02-16'),
+('5ff60321036d4', '340000003', 'K003', '2021-02-10'),
+('5ff6032db6152', '340018309', 'K001', '2021-02-23'),
+('5ff60337f37b6', '340018309', 'K002', '2021-03-16'),
+('5ff60358e5d82', '340060098', 'K003', '2021-03-16'),
+('5ff60364b1a1a', '340018309', 'K002', '2021-04-19'),
+('5ff605e92d516', '340018309', 'K002', '2021-01-08'),
+('5ffaef2aa496d', '340013647', 'K001', '2021-01-13');
 
 -- --------------------------------------------------------
 
@@ -125,13 +136,13 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`nip`, `name`, `email`, `password`, `role_id`, `gender`, `position`, `phone`) VALUES
-('', 'Muhammad Hadid', 'mhadid@bps.go.id', '$2y$10$bUxvr/6uOLSYJJ1nidx0TOc81HL.rY69HeHn0m32nq6BQRpG.DG1i', 1, 'male', 'Staff IPDS', ''),
 ('340000001', 'Beny Ssidharta', 'beny.ssidharta@bps.go.id', '$2y$10$WERCJjA9AbHhXKc9vLPa6eZQpyFjITlJeRc0gmJBrTy9Yu47Vjgc6', 4, 'male', 'KSK Kecamatan Palang', ''),
 ('340000002', 'Lulus', 'lulus@bps.go.id', '$2y$10$y4joL5aZMy.HJHiSvUN6m.ErbZVB/Wg4PZ2DrrFNTsVfc7XIqQ2gS', 2, 'male', 'Kepala TU', ''),
 ('340000003', 'Respati Yekti Wibowo', 'respatih@bps.go.id', '$2y$10$.SBE6XuQT0pyCaFfFBzHruJGUNJ71qhR7UkJYejy6NHff2QiNOE86', 4, 'male', 'Staff Stat. Neraca Wilayah dan Analisis Statistik', ''),
 ('340013647', 'Eko Mardiana', 'eko.mardiana@bps.go.id', '$2y$10$T7RnhCI8fOlbXBOHqCswN.W93.2dZw7lN0uI.RtcEUgiNeVf0s3cO', 3, 'female', 'Kepala BPS Kabupaten Tuban', ''),
 ('340018309', 'Widhi S', 'widhis@bps.go.id', '$2y$10$yt7OxZpPOIo8UcyeKmAY2.A6VbxZ1ciuHKE4osnOeXlJ3V1qaElLy', 2, 'male', 'Kepala Sie Stat. Distribusi', ''),
-('340060098', 'Febiana Dahlia Anjani', 'febianadahliaa@bps.go.id', '$2y$10$7mKVZTu03A8WWIJKuraGcurJDuUoVxtwZPwa6T0KTO8rn9Lds4inW', 1, 'female', 'Staff Stat. Neraca Wilayah dan Analisis Statistik', '081210766330');
+('340060098', 'Febiana Dahlia Anjani', 'febianadahliaa@bps.go.id', '$2y$10$7mKVZTu03A8WWIJKuraGcurJDuUoVxtwZPwa6T0KTO8rn9Lds4inW', 1, 'female', 'Staff Stat. Neraca Wilayah dan Analisis Statistik', '081210766330'),
+('999060218', 'Muhammad Hadid', 'mhadid@bps.go.id', '$2y$10$Ilkoma1cCFunOd0ekRkz.e246Hyg73dl8ObKaiugupnFtuIm5aTSq', 1, 'male', 'Staff IPDS', '');
 
 -- --------------------------------------------------------
 
@@ -179,8 +190,8 @@ CREATE TABLE `user_menu` (
 --
 
 INSERT INTO `user_menu` (`id`, `menu`, `is_active`) VALUES
-(1, 'Perjadin', 1),
-(2, 'Perjadin Pegawai', 1),
+(1, 'Perjadin_saya', 1),
+(2, 'Perjadin_pegawai', 1),
 (3, 'Profil', 0),
 (4, 'Menu', 1),
 (5, 'Daftar pegawai', 0),
@@ -243,30 +254,29 @@ INSERT INTO `user_sub_menu` (`id`, `menu_id`, `sub_menu_name`, `url`, `icon`, `i
 -- Indexes for table `activity`
 --
 ALTER TABLE `activity`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`activity_id`);
 
 --
 -- Indexes for table `activity_code`
 --
 ALTER TABLE `activity_code`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_code_attribute_id` (`attribute_id`),
-  ADD KEY `fk_code_activity_id` (`activity_id`);
+  ADD PRIMARY KEY (`activity_code`),
+  ADD KEY `fk_activity` (`activity_id`),
+  ADD KEY `fk_attribute` (`attribute_id`);
 
 --
 -- Indexes for table `attribute`
 --
 ALTER TABLE `attribute`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`attribute_id`);
 
 --
 -- Indexes for table `perjadin`
 --
 ALTER TABLE `perjadin`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_perjadin_activity_id` (`activity_id`),
-  ADD KEY `fk_perjadin_attribute_id` (`attribute_id`),
-  ADD KEY `fk_perjadin_user_nip` (`nip`);
+  ADD PRIMARY KEY (`perjadin_id`),
+  ADD KEY `fk_perjadin_user_nip` (`nip`),
+  ADD KEY `fk_activity_code` (`activity_code`);
 
 --
 -- Indexes for table `user`
@@ -307,12 +317,6 @@ ALTER TABLE `user_sub_menu`
 --
 
 --
--- AUTO_INCREMENT for table `perjadin`
---
-ALTER TABLE `perjadin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
 -- AUTO_INCREMENT for table `user_access_menu`
 --
 ALTER TABLE `user_access_menu`
@@ -344,15 +348,14 @@ ALTER TABLE `user_sub_menu`
 -- Constraints for table `activity_code`
 --
 ALTER TABLE `activity_code`
-  ADD CONSTRAINT `fk_code_activity_id` FOREIGN KEY (`activity_id`) REFERENCES `activity` (`id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_code_attribute_id` FOREIGN KEY (`attribute_id`) REFERENCES `attribute` (`id`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_activity` FOREIGN KEY (`activity_id`) REFERENCES `activity` (`activity_id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_attribute` FOREIGN KEY (`attribute_id`) REFERENCES `attribute` (`attribute_id`);
 
 --
 -- Constraints for table `perjadin`
 --
 ALTER TABLE `perjadin`
-  ADD CONSTRAINT `fk_perjadin_activity_id` FOREIGN KEY (`activity_id`) REFERENCES `activity` (`id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_perjadin_attribute_id` FOREIGN KEY (`attribute_id`) REFERENCES `attribute` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_activity_code` FOREIGN KEY (`activity_code`) REFERENCES `activity_code` (`activity_code`) ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_perjadin_user_nip` FOREIGN KEY (`nip`) REFERENCES `user` (`nip`) ON UPDATE CASCADE;
 
 --
