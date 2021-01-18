@@ -14,6 +14,7 @@ class Pegawai extends CI_Controller
     public function index()
     {
         $data['title'] = 'Manajemen Pegawai';
+        $data['subMenuName'] = 'Pegawai';
         $data['data_pegawai'] = $this->manajemen_model->getUser();
 
         $this->load->view('partials_/header', $data);

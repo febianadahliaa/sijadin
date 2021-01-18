@@ -13,7 +13,8 @@ class Kegiatan extends CI_Controller
 
     public function index()
     {
-        $data['title'] = 'Manajemen Kegiatan';
+        $data['title'] = 'Managemen Kegiatan';
+        $data['subMenuName'] = 'Kegiatan';
         $data['data_atribut'] = $this->manajemen_model->getAttr();
         $data['data_kegiatan_origin'] = $this->manajemen_model->getOriAct();
         $data['data_kegiatan'] = $this->manajemen_model->getAct();

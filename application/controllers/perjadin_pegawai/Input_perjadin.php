@@ -15,7 +15,8 @@ class Input_perjadin extends CI_Controller
 
 	public function index()
 	{
-		$data['title'] = 'Input Perjadin';
+		$data['title'] = 'Input Perjadin Pegawai';
+		$data['subMenuName'] = 'Input Perjadin';
 		// $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 		$data['data_user'] = $this->perjadin_model->getUser();
 		$data['data_attr'] = $this->perjadin_model->getAttr();

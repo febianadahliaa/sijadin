@@ -26,7 +26,7 @@
 						<select class="form-control custom-select" id='nip' name="nip">
 							<option value="" selected>--Pilih NIP--</option>
 							<?php foreach ($data_user as $value) { ?>
-								<option value="<?= $value->nip ?>" <?= set_select('nip', $value->nip) ?> data-name='<?= $value->name ?>'><?= $value->nip ?></option>
+								<option value="<?= $value->nip ?>" <?= set_select('nip', $value->nip) ?> data-name='<?= $value->name ?>'><?= $value->nip . ' - ' . $value->name ?></option>
 							<?php } ?>
 						</select>
 					</div>
@@ -46,7 +46,7 @@
 						<select class="form-control custom-select" id="attribute" name="attribute">
 							<option value="" selected>--Pilih Atribut--</option>
 							<?php foreach ($data_attr as $value) { ?>
-								<option value="<?= $value->attribute_id ?>" <?= set_select('attribute', $value->attribute_id) ?> data-attribute='<?= $value->attribute ?>'><?= $value->attribute_id . '-' . $value->attribute ?></option>
+								<option value="<?= $value->attribute_id ?>" <?= set_select('attribute', $value->attribute_id) ?> data-attribute='<?= $value->attribute ?>'><?= $value->attribute_id . ' - ' . $value->attribute ?></option>
 							<?php } ?>
 						</select>
 					</div>
@@ -72,8 +72,9 @@
 						<?= form_error('date', '<small class="text-danger pl-3">', '</small>') ?>
 					</div>
 				</div>
-
-				<input class="btn btn-success" type="submit" name="btn" value="Tambahkan" />
+				<div class="form-group">
+					<button type="submit" class="btn btn-primary btn-sm mt-2">Input Data</button>
+				</div>
 			</form>
 
 			<!-- <script>
