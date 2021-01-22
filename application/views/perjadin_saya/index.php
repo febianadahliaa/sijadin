@@ -2,12 +2,18 @@
 <div class="container-fluid px-md-4">
 
     <!-- Page heading -->
-    <h1 class="h3 mb-4 text-gray-800"><?= $title; ?></h1>
-
     <div class="row">
-        <div class="col-lg">
+        <div class="col-lg-8">
+            <h3 class="text-gray-800"><strong><?= $title ?></strong></h3>
+            <hr class="sidebar-divider mb-4">
+        </div>
+    </div>
+
+    <!-- Page Content -->
+    <div class="row">
+        <div class="col-lg-8">
             <div class="table-responsive">
-                <table class="table table-striped" id="perjadinSaya" width="100%" cellspacing="0">
+                <table class="table table-striped dataTables" width="100%" cellspacing="0">
                     <thead class="thead-dark">
                         <tr>
                             <th>No.</th>

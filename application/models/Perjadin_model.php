@@ -30,6 +30,11 @@ class Perjadin_model extends CI_Model
 		return $this->db->get('attribute')->result();
 	}
 
+	public function getAct()
+	{
+		return $this->db->get('activity')->result();
+	}
+
 	public function getMatrixByMonth($year, $month)
 	{
 		return $this->db->select('perjadin.nip, name, perjadin_id, activity_code, date')
@@ -49,7 +54,27 @@ class Perjadin_model extends CI_Model
 	public function getActByAttr($attr_id)
 	{
 		$query = $this->db->join('activity', 'activity_code.activity_id = activity.activity_id')
+			->order_by('activity.activity_id', 'ASC')
 			->get_where('activity_code', ['attribute_id' => $attr_id]);
+		$output = '<option value="">--Pilih Kegiatan--</option>';
+		foreach ($query->result() as $row) {
+			$output .= '<option value="' . $row->activity_id . '">' . $row->activity_id . '-' . $row->activity . '</option>';
+		}
+		return $output;
+	}
+
+	public function getOthersActByAttr($attr_id)
+	{
+		$queryMenu = "SELECT * 
+						FROM activity
+						WHERE activity_id 
+						NOT IN (
+							SELECT activity_id 
+							FROM activity_code 
+							WHERE attribute_id = '$attr_id'
+						)
+						ORDER BY activity_id ASC";
+		$query = $this->db->query($queryMenu);
 		$output = '<option value="">--Pilih Kegiatan--</option>';
 		foreach ($query->result() as $row) {
 			$output .= '<option value="' . $row->activity_id . '">' . $row->activity_id . '-' . $row->activity . '</option>';
@@ -99,18 +124,8 @@ class Perjadin_model extends CI_Model
 		return $this->db->insert($this->mytable, $data);
 	}
 
-	public function update()
+	public function update($data, $perjadin_id)
 	{
-		$perjadin_id = $this->input->post('perjadin_id');
-		$nip = $this->input->post('nip');
-		$code = $this->input->post('code');
-		$date = $this->input->post('date');
-
-		$data = array(
-			'nip' => $nip,
-			'activity_code' => $code,
-			'date' => $date
-		);
 		return $this->db->update($this->mytable, $data, ['perjadin_id' => $perjadin_id]);
 	}
 

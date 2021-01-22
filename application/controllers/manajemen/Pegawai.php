@@ -27,6 +27,7 @@ class Pegawai extends CI_Controller
     public function add()
     {
         $data['title'] = 'Input Data Pegawai';
+        $data['subMenuName'] = 'Pegawai';
         $data['data_role'] = $this->manajemen_model->getRole();
         $data['data_position'] = $this->manajemen_model->getPosition();
 
@@ -123,7 +124,7 @@ class Pegawai extends CI_Controller
         }
     }
 
-    public function resetPassword($userId)
+    public function resetPassword()
     {
         $config = [
             [
@@ -138,10 +139,14 @@ class Pegawai extends CI_Controller
         ];
         $this->form_validation->set_rules($config);
 
+        $userId = $this->input->post('nip');
+
         if ($this->form_validation->run()) {
             $this->manajemen_model->updatePassword($userId);
             $this->session->set_flashdata('message', 'Password berhasil diganti.');
-            redirect('manajemen/pegawai');
+        } else {
+            $this->session->set_flashdata('error', 'Password gagal diganti. Cek panjang karakter!');
         }
+        redirect('manajemen/pegawai');
     }
 }

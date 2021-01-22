@@ -40,6 +40,11 @@ class Input_perjadin extends CI_Controller
 		echo $this->perjadin_model->getActByAttr($attr_id);
 	}
 
+	public function searchOthersAct($attr_id)
+	{
+		echo $this->perjadin_model->getOthersActByAttr($attr_id);
+	}
+
 	public function getKode($attr_id, $act_id)
 	{
 		echo $this->perjadin_model->getKode($attr_id, $act_id)->activity_code;
@@ -85,6 +90,7 @@ class Input_perjadin extends CI_Controller
 			redirect('perjadin_pegawai/input_perjadin');
 		} else {
 			$data['title'] = 'Input Perjadin';
+			$data['subMenuName'] = 'Input Perjadin';
 			$data['data_user'] = $this->perjadin_model->getUser();
 			$data['data_attr'] = $this->perjadin_model->getAttr();
 

@@ -62,8 +62,19 @@ class List_perjadin extends CI_Controller
 		];
 		$this->form_validation->set_rules($config);
 
+		$perjadin_id = $this->input->post('perjadin_id');
+		$nip = $this->input->post('nip');
+		$code = $this->input->post('code');
+		$date = $this->input->post('date');
+
+		$data = array(
+			'nip' => $nip,
+			'activity_code' => $code,
+			'date' => $date
+		);
+
 		if ($this->form_validation->run()) {
-			if ($this->perjadin_model->update()) { //update data
+			if ($this->perjadin_model->update($data, $perjadin_id)) { //update data
 				$this->session->set_flashdata('success', 'Data berhasil disimpan');
 				redirect(site_url('perjadin_pegawai/list_perjadin'));
 			}

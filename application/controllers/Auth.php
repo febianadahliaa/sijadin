@@ -105,6 +105,7 @@ class Auth extends CI_Controller
 	public function changePassword()
 	{
 		$data['title'] = 'Ganti Password';
+		$data['subMenuName'] = '';
 		$data['user'] = $this->auth_model->getUser();
 
 		$config = [

@@ -73,9 +73,19 @@ class Manajemen_model extends CI_Model
 		return $this->db->get('attribute')->result();
 	}
 
+	public function insertAttr($data)
+	{
+		return $this->db->insert('attribute', $data);
+	}
+
 	public function getOriAct()
 	{
 		return $this->db->get('activity')->result();
+	}
+
+	public function insertOriAct($data)
+	{
+		return $this->db->insert('activity', $data);
 	}
 
 	public function getAct()
@@ -86,6 +96,11 @@ class Manajemen_model extends CI_Model
 			->join('activity', 'activity_code.activity_id = activity.activity_id', 'Left')
 			->get();
 		return $query->result();
+	}
+
+	public function insertAct($data)
+	{
+		return $this->db->insert('activity_code', $data);
 	}
 
 	public function deleteAttr($attrId)

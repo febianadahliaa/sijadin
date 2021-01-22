@@ -45,11 +45,9 @@
 <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
-            <div class="modal-header card-header">
-                <h1 class="modal-title h3 text-gray-800" id="editModalLabel">Edit Perjadin Pegawai</h1>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
+            <div class="modal-header bg-primary">
+                <h5 class="modal-title h5 text-light" id="editModalLabel">Edit Perjadin Pegawai</h5>
+                <button class="close text-light" type="button" data-dismiss="modal" aria-label="Close"><i class="fas fa-times"></i></button>
             </div>
             <form action="<?php echo base_url('perjadin_pegawai/list_perjadin/edit') ?>" method="post" enctype="multipart/form-data">
                 <div class="modal-body">
@@ -120,27 +118,131 @@
 <div class="modal fade" id="resetPasswordModal" tabindex="-1" aria-labelledby="resetPasswordModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header card-header">
-                <h3 class="modal-title h3 text-gray-800" id="resetPasswordModalLabel">Reset Password Pegawai</h3>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <div class="modal-header bg-warning">
+                <h5 class="modal-title h5 text-dark" id="resetPasswordModalLabel">Reset Password Pegawai</h5>
+                <button type="button" class="close text-dark" data-dismiss="modal" aria-label="Close"><i class="fas fa-times"></i></button>
             </div>
 
-            <form action="<?= base_url('manajemen/pegawai/resetPassword') ?>" method="post" enctype="multipart/form-data">
+            <form action="<?= base_url('manajemen/pegawai/resetPassword') ?>" method="post" enctype="multipart/form-data" role="form">
                 <div class="modal-body">
                     <div class="form-group">
-                        <input type="password" class="form-control" id="password" name="password" placeholder="Masukkan password baru">
-                        <?= form_error('password', '<small class="text-danger pl-3">', '</small>') ?>
+                        <input type="hidden" class="form-control" id="nip" name="nip" value="" />
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Masukkan password baru" required>
+                        <small class="text-danger pl-3">*panjang minimal 6 karakter</small>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <input class="btn btn-primary" type="submit" name="btn" value="Ganti Password" />
+                    <button class="btn btn-primary" type="submit" name="btn">Ganti Password</button>
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Batalkan</button>
-
-                    <!-- <button type="submit" class="btn btn-primary">Ganti Password</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button> -->
                 </div>
             </form>
 
+        </div>
+    </div>
+</div>
+
+<!-- Add Data Attribute -->
+<div class="modal fade" id="addDataAttribute" tabindex="-1" aria-labelledby="addDataAttributeLabel" aria-hidden="true" data-backdrop="static" data-keyboard="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-secondary">
+                <h5 class="modal-title h5 text-light" id="addDataAttributeLabel">Tambah Data Atribut</h5>
+                <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close"><i class="fas fa-times"></i></button>
+            </div>
+            <form action="<?= base_url('manajemen/kegiatan/addAttr') ?>" method="post" enctype="multipart/form-data" role="form">
+                <div class="modal-body">
+                    <div class="form-row">
+                        <div class="form-group col-lg-6 mb-0">
+                            <label class="mt-2" for="nama">Kode Atribut</label>
+                            <input class="form-control" type="text" name="codeAttr" id='codeAttr' placeholder="Masukkan Kode Atribut" required />
+                            <small class="text-danger pl-3">*panjang kode minimal 3 karakter</small>
+                        </div>
+                        <div class="form-group col-lg-6 mb-0">
+                            <label class="mt-2" for="nama">Nama Atribut</label>
+                            <input class="form-control" type="text" name="nameAttr" id='nameAttr' placeholder="Masukkan Nama Atribut" required />
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" type="submit" name="btn">Tambah</button>
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Batal</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Add Data Origin Activity -->
+<div class="modal fade" id="addDataOriActivity" tabindex="-1" aria-labelledby="addDataOriActivityLabel" aria-hidden="true" data-backdrop="static" data-keyboard="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-warning">
+                <h5 class="modal-title h5 text-dark" id="addDataOriActivityLabel">Tambah Data Kegiatan Origin</h5>
+                <button type="button" class="close text-dark" data-dismiss="modal" aria-label="Close"><i class="fas fa-times"></i></button>
+            </div>
+            <form action="<?= base_url('manajemen/kegiatan/addOriAct') ?>" method="post" enctype="multipart/form-data" role="form">
+                <div class="modal-body">
+                    <div class="form-row">
+                        <div class="form-group col-lg-6 mb-0">
+                            <label class="mt-2" for="nama">Kode Kegiatan</label>
+                            <input class="form-control" type="text" name="codeOriAct" id='codeOriAct' placeholder="Masukkan Kode Kegiatan" required />
+                            <small class="text-danger pl-3">*panjang kode minimal 3 karakter</small>
+                        </div>
+                        <div class="form-group col-lg-6 mb-0">
+                            <label class="mt-2" for="nama">Nama Kegiatan</label>
+                            <input class="form-control" type="text" name="nameOriAct" id='nameOriAct' placeholder="Masukkan Nama Kegiatan" required />
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" type="submit" name="btn">Tambah</button>
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Batal</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Add Data Activity -->
+<div class="modal fade" id="addDataActivity" tabindex="-1" aria-labelledby="addDataActivityLabel" aria-hidden="true" data-backdrop="static" data-keyboard="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-info">
+                <h5 class="modal-title h5 text-light" id="addDataActivityLabel">Tambah Data Kegiatan</h5>
+                <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close"><i class="fas fa-times"></i></button>
+            </div>
+            <form action="<?= base_url('manajemen/kegiatan/addAct') ?>" method="post" enctype="multipart/form-data" role="form">
+                <div class="modal-body">
+                    <div class="form-row">
+                        <div class="form-group col-lg-6 mb-0">
+                            <label class="mt-2" for="nama">Kode Kegiatan</label>
+                            <input class="form-control" type="text" name="codeAct" id='codeAct' placeholder="Masukkan Kode Kegiatan" required />
+                            <small class="text-danger pl-3">*panjang kode minimal 4 karakter</small>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-lg-4 mb-0">
+                            <label class="mt-2" for="attribute">Atribut</label>
+                            <select class="form-control custom-select" id="addAttr" name="addAttr" required>
+                                <option value="" selected>--Pilih Atribut--</option>
+                                <?php foreach ($data_attr as $value) { ?>
+                                    <option value="<?= $value->attribute_id ?>" <?= set_select('addAttr', $value->attribute_id) ?> data-attribute='<?= $value->attribute ?>'><?= $value->attribute_id . '-' . $value->attribute ?></option>
+                                <?php } ?>
+                            </select>
+                        </div>
+                        <div class="form-group col-lg-5 mb-0">
+                            <label class="mt-2" for="activity">Kegiatan</label>
+                            <select class="form-control custom-select" id="addAct" type="text" name="addAct" required>
+                                <option value="" selected>--Pilih Kegiatan--</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" type="submit" name="btn">Tambah</button>
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Batal</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -154,6 +256,14 @@
 
 <!-- Custom scripts for all pages-->
 <script src="<?= base_url('assets/'); ?>js/sb-admin-2.min.js"></script>
+
+<!-- Custom js -->
+<script src="<?= base_url('assets/'); ?>js/myscript.js"></script>
+
+<!-- DataTables -->
+<script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.23/js/dataTables.bootstrap4.min.js"></script>
 
 <!-- Sweet Alert -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
@@ -520,12 +630,6 @@
 <!-- Autofill Input -->
 <script type="text/javascript">
     $(document).ready(function() {
-        // Autofill Name
-        $('#nip').change(function() {
-            var name = $(this).find(':selected').data('name');
-            $('#name').val(name);
-        });
-
         // Autofill Activity
         $('#attribute').change(function() {
             var id_attr = $(this).find(':selected').val();
@@ -543,6 +647,26 @@
                 });
             } else {
                 $('#activity').html('<option value="">--Pilih Kegiatan--</option>');
+            }
+        });
+
+        // Autofill Add Activity
+        $('#addAttr').change(function() {
+            var id_attr = $(this).find(':selected').val();
+            if (id_attr) {
+                $.ajax({
+                    url: '<?= base_url('perjadin_pegawai/input_perjadin/searchOthersAct/') ?>' + id_attr,
+                    type: 'POST',
+                    success: function(data) {
+                        if (data) {
+                            $('#addAct').html(data);
+                        } else {
+                            $('#addAct').html('<option value="">--Pilih Kegiatan--</option>');
+                        }
+                    }
+                });
+            } else {
+                $('#addAct').html('<option value="">--Pilih Kegiatan--</option>');
             }
         });
 
@@ -607,55 +731,6 @@
                     }
                 });
             }
-        });
-    });
-</script>
-
-<!-- Auto Close Alert -->
-<script type="text/javascript">
-    $(document).ready(function() {
-        window.setTimeout(function() {
-            $(".alert").fadeTo(500, 0).slideUp(500, function() {
-                $(this).remove();
-            });
-        }, 4000);
-    });
-</script>
-
-<!-- DataTables -->
-<script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.23/js/dataTables.bootstrap4.min.js"></script>
-
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('#dataTable-list').DataTable({
-            "lengthMenu": [
-                [+5, 10, 25, 50, -1],
-                [5, 10, 25, 50, "All"]
-            ],
-        });
-    });
-</script>
-
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('#perjadinSaya').DataTable({
-            "lengthMenu": [
-                [+5, 10, 25, 50, -1],
-                [5, 10, 25, 50, "All"]
-            ],
-        });
-    });
-</script>
-
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('.dataTable-management').DataTable({
-            "lengthMenu": [
-                [+5, 10, 25, 50, -1],
-                [5, 10, 25, 50, "All"]
-            ],
         });
     });
 </script>

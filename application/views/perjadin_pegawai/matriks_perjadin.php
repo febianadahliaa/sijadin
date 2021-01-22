@@ -1,9 +1,14 @@
 <!-- Begin Page Content -->
 <div class="container-fluid px-md-4">
-
 	<!-- Page heading -->
-	<h1 class="h3 mb-4 text-gray-800"><?= $title; ?></h1>
+	<div class="row">
+		<div class="col-lg">
+			<h3 class="text-gray-800"><strong><?= $title ?></strong></h3>
+			<hr class="sidebar-divider">
+		</div>
+	</div>
 
+	<!-- Page Content -->
 	<div class="row">
 		<div class="col-lg">
 			<div class="row">

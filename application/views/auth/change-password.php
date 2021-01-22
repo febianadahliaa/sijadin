@@ -2,8 +2,14 @@
 <div class="container-fluid px-md-4">
 
     <!-- Page heading -->
-    <h1 class="h3 mb-4 text-gray-800"><?= $title; ?></h1>
+    <div class="row">
+        <div class="col-lg-7">
+            <h3 class="text-gray-800"><strong><?= $title ?></strong></h3>
+            <hr class="sidebar-divider">
+        </div>
+    </div>
 
+    <!-- Notification -->
     <div class="row">
         <div class="col-lg-6">
             <?php
@@ -20,6 +26,12 @@
                 echo '</div>';
             }
             ?>
+        </div>
+    </div>
+
+    <!-- Page Content -->
+    <div class="row">
+        <div class="col-lg-6">
             <form action="<?= base_url('auth/changepassword'); ?>" method="post">
                 <div class="form-group">
                     <label for="currentPassword">Password Lama</label>
