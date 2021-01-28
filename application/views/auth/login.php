@@ -12,7 +12,7 @@
                         <div class="col-lg">
                             <div class="p-5">
                                 <div class="text-center">
-                                    <h1 class="h4 text-gray-900 mb-4">Login Perjadin</h1>
+                                    <h1 class="h4 text-gray-700 mb-4"><i class="rotate-n-15 fas fa-file-alt fa-lg mr-4"></i><strong>Login Perjadin</strong></h1>
                                 </div>
                                 <?php
                                 if ($this->session->flashdata('error') != '') {

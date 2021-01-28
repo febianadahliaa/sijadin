@@ -1,13 +1,18 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 ?>
+<?php
+$ci = new CI_Controller();
+$ci = &get_instance();
+$ci->load->helper('url');
+?>
 <!DOCTYPE html>
 
 <head>
 	<!-- Icons purchased via Iconfinder under Basic License -->
-	<link rel="shortcut icon" type="image/icon" href="mh.ico">
-	<link rel="stylesheet" href="assets/css/main.scss">
-	<script src="assets/css/main.js"></script>
+	<link rel="shortcut icon" type="image/icon" href="<?= base_url('assets/img/icon/text.ico') ?>">
+	<link rel="stylesheet" href="<?= base_url('assets/css/main.scss') ?>">
+	<script src="<?= base_url('assets/css/main.js') ?>"></script>
 	<title>404 Page Not Found</title>
 </head>
 
@@ -25,9 +30,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 	<div class="error">
 		<div class="error__title">404</div>
-		<div class="error__subtitle">Maaf</div>
+		<div class="error__subtitle">Maaf...</div>
 		<div class="error__description">Halaman yang anda minta <strong>tidak ditemukan.</strong></div>
-		<a href="auth"><button class="error__button error__button--active">OK</button></a>
+		<a href="<?= base_url('auth') ?>"><button class="error__button error__button--active">OK</button></a>
 	</div>
 
 	<div class="astronaut">

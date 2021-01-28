@@ -52,8 +52,3 @@ defined('BASEPATH') or exit('No direct script access allowed');
 $route['default_controller'] = 'perjadin_saya'; //welcome
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
-
-$route['perjadin_pegawai/(:any)'] = 'perjadin_pegawai/list_perjadin';
-$route['perjadin_pegawai'] = 'perjadin_pegawai/list_perjadin';
-$route['manajemen/(:any)'] = 'manajemen/pegawai';
-$route['manajemen'] = 'manajemen/pegawai';

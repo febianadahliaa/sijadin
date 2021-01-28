@@ -7,12 +7,28 @@ class Auth extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->library('form_validation');
-		$this->load->library('session');
 		$this->load->model('auth_model');
 	}
 
 	public function index()
+	{
+		$email = $this->session->userdata('email');
+		$role =  $this->session->userdata('roleId');
+
+		if ($email == NULL) {
+			$this->login();
+		} else {
+			if ($role == 1) {
+				redirect('manajemen/pegawai');
+			} elseif ($role == 2) {
+				redirect('perjadin_pegawai/list_perjadin');
+			} else {
+				redirect('perjadin_saya');
+			}
+		}
+	}
+
+	public function login()
 	{
 		$config = [
 			[
