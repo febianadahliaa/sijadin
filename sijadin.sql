@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.5
+-- version 5.0.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 18, 2021 at 08:34 AM
+-- Generation Time: Jan 30, 2021 at 04:10 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -19,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `id10559296_sijadin`
+-- Database: `sijadin`
 --
 
 -- --------------------------------------------------------
@@ -29,8 +28,8 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `activity` (
-  `activity_id` varchar(3) NOT NULL,
-  `activity` varchar(50) NOT NULL
+  `activity_id` varchar(5) NOT NULL,
+  `activity` varchar(256) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -38,9 +37,99 @@ CREATE TABLE `activity` (
 --
 
 INSERT INTO `activity` (`activity_id`, `activity`) VALUES
-('A01', 'KSA padi'),
-('A02', 'Survei ubinan'),
-('A04', 'www');
+('K1001', 'Kalender Pencatatan Pemotongan Ternak Bulanan'),
+('K1002', 'Laporan Triwulanan Pemotongan Ternak'),
+('K1003', 'Laporan Triwulanan Pelabuhan Perikanan (PPS/PPN/PPP/PPI), Tempat Pelelangan Ikan (TPI)'),
+('K1004', 'Laporan Tahunan Tempat Pelelangan Ikan/Pelabuhan Pendaratan Ikan'),
+('K1005', 'Survei Industri Besar Dan Sedang'),
+('K1006', 'Perusahaan Industri Manufaktur'),
+('K1007', 'Perusahaan Manufaktur Industri Besar Sedang'),
+('K1008', 'Direktori Perusahaan Besar Sedang'),
+('K1009', 'Survei Tahunan Perusahaan Industri Manufaktur'),
+('K1010', 'Survei Industri Mikro Kecil. Pemutakhiran Rumahtangga'),
+('K1011', 'Survei Industri Mikro Kecil Triwulanan'),
+('K1012', 'Survei Industri Mikro Kecil Tahunan'),
+('K1013', 'Survei Penggalian Berbadan Hukum'),
+('K1014', 'Survei Penggalian Rumahtangga'),
+('K1015', 'Survei Air Bersih/PDAB'),
+('K1016', 'Direktori Perusahaan Konstruksi'),
+('K1017', 'Survei Konstruksi Tahunan'),
+('K1018', 'Survei Konstruksi Bulanan'),
+('K1019', 'Survei Konstruksi Triwulanan'),
+('K1020', 'Survei Ubinan Tanaman Pangan. Daftar Sample Bloksensus'),
+('K1021', 'Survei Ubinan Tanaman Pangan. Pemutakhiran Daftar Rumahtangga'),
+('K1022', 'Survei Ubinan Tanaman Pangan. Daftar Sample Rumahtangga'),
+('K1023', 'Survei Ubinan Tanaman Pangan. Keterangan Hasil Ubinan'),
+('K1024', 'Survei Kerangka Sample Area Tanaman Padi'),
+('K1025', 'Survei Kerangka Sample Area Tanaman Jagung'),
+('K1026', 'Survei Pertanian Antar Sensus'),
+('K1027', 'Survei Konversi Gabah Ke Beras. Keterangan Rendeman Penggilingan'),
+('K1028', 'Survei Konversi Gabah Ke Beras. Keterangan Konversi Pengeringan'),
+('K1029', 'Survei Ongkos Usaha Tani HORTIKULTURA'),
+('K1030', 'Laporan Tahunan Budidaya Tambak'),
+('K1031', 'Pendataan Industri Penggilingan Padi'),
+('K2001', 'Survei Harga Produsen Perdesaan (Subsektor Tanaman Pangan)'),
+('K2002', 'Survei Harga Produsen Perdesaan (Subsektor Hortikultura)'),
+('K2003', 'Survei Harga Konsumen Pedesaan (Subsektor Perikanan Tangkap)'),
+('K2004', 'Survei Statistik Keuangan Desa'),
+('K2005', 'Survei Lembaga Keuangan. Koperasi Simpan Pinjam'),
+('K2006', 'Survei Profil Pasar Tradisional, Pusat Perbelanjaan Dan Toko Modern'),
+('K2007', 'Survei Statistik Harga Produsen Non Kontruksi'),
+('K2008', 'Survei Statistik Harga Produsen Kontruksi'),
+('K2009', 'Survei Perdagangan Antar Wilayah'),
+('K2010', 'Survei Wisatawan Nusantara (Wisnus)'),
+('K2011', 'Survei Objek Daya Tarik Pariwisata'),
+('K2012', 'Survei Harga Perdagangan Besar Bulanan'),
+('K2013', 'Survei Harga Produsen Nilai Tukar Pengolah Hasil Perikanan'),
+('K2014', 'Survei Triwulanan Kegiatan Usaha (Kategori Perdagangan)'),
+('K2015', 'Perusahaan/Usaha Perdagangan Menengah Besar'),
+('K2016', 'Survei Pola Distribusi Perdagangan (VPDP-19)'),
+('K3001', 'Survei Khusus Konsumsi RumahTangga Triwulanan'),
+('K3002', 'Survei Khusus Lembaga NonProfit RumahTangga Triwulanan'),
+('K3003', 'Direktori Lembaga Non Profit'),
+('K3004', 'Survei Khusus Neraca Produksi'),
+('K3005', 'Survei Khusus Studi Penyusunan Perubahan Inventori'),
+('K3006', 'Pengumpulan Data Sekunder PMTB'),
+('K3007', 'Pengumpulan Data SMAK'),
+('K3008', 'Survei Tendensi Bisnis Triwulanan'),
+('K3009', 'Survei Dampak Covid-19'),
+('K4001', 'Survei Sosial Ekonomi Nasional'),
+('K4002', 'Survei Sosial Ekonomi Nasional. Daftar Sample Bloksensus'),
+('K4003', 'Survei Sosial Ekonomi Nasional. Range Harga (RH)'),
+('K4004', 'Survei Sosial Ekonomi Nasional. Daftar Sample Rumahtangga'),
+('K4005', 'Survei Sosial Ekonomi Nasional. Daftar Pemutakhiran Rumahtangga'),
+('K4006', 'Survei Sosial Ekonomi Nasional. Keterangan Konsumsi/Pengeluaran Makanan & Bukan Makanan, Dan Pendapatan Penerimaan Rumahtangga'),
+('K4007', 'Survei Angkatan Kerja Nasional'),
+('K4008', 'Survei Angkatan Kerja Nasional. Daftar Sample Bloksensus'),
+('K4009', 'Survei Angkatan Kerja Nasional. Daftar Pemutakhiran Rumahtangga'),
+('K4010', 'Survei Angkatan Kerja Nasional. Daftar Sample Rumahtangga'),
+('K4011', 'Survei Angkatan Kerja Nasional. Keterangan Anggota Rumahtangga'),
+('K4012', 'Satuan Lingkungan Setempat Sensus Penduduk 2020'),
+('K4013', 'Sosialisi SPOnline Tingkat Kecamatan'),
+('K4014', 'Potensi Desa 2020'),
+('K4015', 'Sensus Penduduk 2020'),
+('K4016', 'Sensus Penduduk 2020. Daftar Penduduk Pada Lingkungan Terkecil (SLS)'),
+('K4017', 'Sensus Penduduk 2020. Peta Wilayah SLS'),
+('K4018', 'Sensus Penduduk 2020. Daftar Penduduk Desa/Kelurahan Tak Ter-Identifikasi'),
+('K4019', 'Sensus Penduduk 2020. Koordinator Sensus Penduduk Kecamatan'),
+('K4020', 'Sensus Penduduk 2020. Lanjutan'),
+('K4021', 'Sensus Penduduk 2020. Daftar Sample SP'),
+('K5001', 'Data Skunder Publikasi Kecamatan Dalam Angka'),
+('K5002', 'Design Dan Tataletak Publikasi Kecamatan Dalam Angka'),
+('K5003', 'Tabel-Tabel Publikasi Kecamatan Dalam Angka'),
+('K5004', 'Grafik dan Infografik Publikasi Kecamatan Dalam Angka'),
+('K5005', 'Pemutakhiran Master File Desa dan Muatan Blok Sensus'),
+('K5006', 'Pemetaan 2020'),
+('K5007', 'Koordinator Lapangan Pemetaan 2020 (KORLAP)'),
+('K5008', 'Digitasi Peta Desa SPLIT SLS (RT-RW)'),
+('K5009', 'Digitasi Peta Desa'),
+('K5010', 'Pengolahan Dokumen SP2020'),
+('K6001', 'Pengiriman Surat Dinas'),
+('K6002', 'Penyusunan Surat Menyurat'),
+('K6003', 'Laporan Capaian Kinerja Pegawai Realisasi'),
+('K6004', 'Laporan Capaian Kinerja Pegawai Target'),
+('K6005', 'Laporan Sasaran Kinerja Pegawai'),
+('K6006', 'Laporan Kinerja Work From Home (LapKinWFH)');
 
 -- --------------------------------------------------------
 
@@ -49,9 +138,9 @@ INSERT INTO `activity` (`activity_id`, `activity`) VALUES
 --
 
 CREATE TABLE `activity_code` (
-  `activity_code` varchar(4) NOT NULL,
+  `activity_code` varchar(5) NOT NULL,
   `attribute_id` varchar(3) NOT NULL,
-  `activity_id` varchar(3) NOT NULL
+  `activity_id` varchar(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -59,10 +148,10 @@ CREATE TABLE `activity_code` (
 --
 
 INSERT INTO `activity_code` (`activity_code`, `attribute_id`, `activity_id`) VALUES
-('K001', 'P01', 'A02'),
-('K002', 'P03', 'A02'),
-('K003', 'P01', 'A01'),
-('K005', 'P02', 'A02');
+('K1001', 'A03', 'K1009'),
+('K1002', 'A04', 'K1009'),
+('K1003', 'A03', 'K1010'),
+('K1004', 'A04', 'K1010');
 
 -- --------------------------------------------------------
 
@@ -72,7 +161,7 @@ INSERT INTO `activity_code` (`activity_code`, `attribute_id`, `activity_id`) VAL
 
 CREATE TABLE `attribute` (
   `attribute_id` varchar(3) NOT NULL,
-  `attribute` varchar(15) NOT NULL
+  `attribute` varchar(128) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -80,10 +169,12 @@ CREATE TABLE `attribute` (
 --
 
 INSERT INTO `attribute` (`attribute_id`, `attribute`) VALUES
-('P01', 'Pengawasan'),
-('P02', 'Pencacahan'),
-('P03', 'Listing'),
-('P05', 'www');
+('A01', 'Listing'),
+('A02', 'Updating'),
+('A03', 'Pencacahan'),
+('A04', 'Pengawasan'),
+('A05', 'Pemeriksaan'),
+('A06', 'Revisit');
 
 -- --------------------------------------------------------
 
@@ -94,7 +185,7 @@ INSERT INTO `attribute` (`attribute_id`, `attribute`) VALUES
 CREATE TABLE `perjadin` (
   `perjadin_id` varchar(13) NOT NULL,
   `nip` varchar(9) NOT NULL,
-  `activity_code` varchar(4) NOT NULL,
+  `activity_code` varchar(5) NOT NULL,
   `date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -103,21 +194,21 @@ CREATE TABLE `perjadin` (
 --
 
 INSERT INTO `perjadin` (`perjadin_id`, `nip`, `activity_code`, `date`) VALUES
-('5ff408fc9cd03', '340018309', 'K003', '2021-01-05'),
-('5ff409288742e', '999060218', 'K003', '2021-02-02'),
-('5ff410f2e6b43', '340018309', 'K002', '2021-02-10'),
-('5ff447d689579', '340013647', 'K002', '2021-01-15'),
-('5ff447f76fd84', '340000002', 'K001', '2021-01-27'),
-('5ff5f2981f0d5', '340018309', 'K002', '2021-02-16'),
-('5ff60321036d4', '340000003', 'K003', '2021-02-10'),
-('5ff6032db6152', '340018309', 'K001', '2021-02-23'),
-('5ff60337f37b6', '340018309', 'K002', '2021-03-16'),
-('5ff60358e5d82', '340060098', 'K003', '2021-03-16'),
-('5ff60364b1a1a', '340018309', 'K002', '2021-04-19'),
-('5ff605e92d516', '340018309', 'K002', '2021-01-08'),
-('5ffaef2aa496d', '340013647', 'K001', '2021-01-14'),
-('5ffe9c0a3da3a', '999060218', 'K001', '2021-02-06'),
-('60051d7fbf0d0', '340000001', 'K001', '2021-03-31');
+('5ff408fc9cd03', '340018309', 'K1003', '2021-01-05'),
+('5ff409288742e', '999060218', 'K1003', '2021-02-02'),
+('5ff410f2e6b43', '340018309', 'K1002', '2021-02-10'),
+('5ff447d689579', '340013647', 'K1002', '2021-01-15'),
+('5ff447f76fd84', '340000002', 'K1001', '2021-01-27'),
+('5ff5f2981f0d5', '340018309', 'K1002', '2021-02-16'),
+('5ff60321036d4', '340000003', 'K1003', '2021-02-10'),
+('5ff6032db6152', '340018309', 'K1001', '2021-02-23'),
+('5ff60337f37b6', '340018309', 'K1002', '2021-03-16'),
+('5ff60358e5d82', '340060098', 'K1003', '2021-03-16'),
+('5ff60364b1a1a', '340018309', 'K1001', '2021-04-19'),
+('5ff605e92d516', '340018309', 'K1002', '2021-01-08'),
+('5ffaef2aa496d', '340013647', 'K1001', '2021-01-14'),
+('5ffe9c0a3da3a', '999060218', 'K1001', '2021-02-06'),
+('6015620f26644', '340013647', 'K1001', '2021-01-14');
 
 -- --------------------------------------------------------
 
@@ -148,7 +239,7 @@ INSERT INTO `user` (`nip`, `name`, `email`, `password`, `role_id`, `gender`, `po
 ('340000003', 'Respati Yekti Wibowo', 'respatih@bps.go.id', '$2y$10$.SBE6XuQT0pyCaFfFBzHruJGUNJ71qhR7UkJYejy6NHff2QiNOE86', 4, 'male', 11, ''),
 ('340013647', 'Eko Mardiana', 'eko.mardiana@bps.go.id', '$2y$10$T7RnhCI8fOlbXBOHqCswN.W93.2dZw7lN0uI.RtcEUgiNeVf0s3cO', 3, 'female', 1, ''),
 ('340018309', 'Widhi S', 'widhis@bps.go.id', '$2y$10$yt7OxZpPOIo8UcyeKmAY2.A6VbxZ1ciuHKE4osnOeXlJ3V1qaElLy', 2, 'male', 6, ''),
-('340060098', 'Febiana Dahlia Anjani', 'febianadahliaa@bps.go.id', '$2y$10$7mKVZTu03A8WWIJKuraGcurJDuUoVxtwZPwa6T0KTO8rn9Lds4inW', 1, 'female', 11, '081210766330'),
+('340060098', 'Febiana Dahlia Anjani', 'febianadahliaa@bps.go.id', '$2y$10$.Zffj5OYd/FxojCr.uIws.uhjFgKhDniXuwh5uMV2rP2mrztW9hUm', 1, 'female', 11, '081210766330'),
 ('987654321', 'Yuki', 'yuki@bps.go.id', '$2y$10$4MEW/9E2b1CuIeud3BW0Uea4uRrDU1IhGt3baVx0Y6/LiEjTN64oi', 4, 'female', 7, '0'),
 ('999060218', 'Muhammad Hadid', 'mhadid@bps.go.id', '$2y$10$u08uHW6zUNFOgBHaSVn51u/i9a3KW0tic9ELmCRa.EXy55vD78kjy', 1, 'male', 13, '');
 
@@ -403,7 +494,7 @@ ALTER TABLE `user_sub_menu`
 --
 ALTER TABLE `activity_code`
   ADD CONSTRAINT `fk_activity` FOREIGN KEY (`activity_id`) REFERENCES `activity` (`activity_id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_attribute` FOREIGN KEY (`attribute_id`) REFERENCES `attribute` (`attribute_id`);
+  ADD CONSTRAINT `fk_attribute` FOREIGN KEY (`attribute_id`) REFERENCES `attribute` (`attribute_id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `perjadin`
