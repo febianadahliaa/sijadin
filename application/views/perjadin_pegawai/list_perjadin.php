@@ -21,7 +21,7 @@
 			?>
 
 			<div class="table-responsive">
-				<table class="table table-hover dataTables" width="100%" cellspacing="0">
+				<table class="table table-hover dataTables" id="dataPerPeg" width="100%" cellspacing="0">
 					<thead class="thead-dark">
 						<tr>
 							<th class="text-center">No.</th>
@@ -33,7 +33,7 @@
 						</tr>
 					</thead>
 
-					<tbody id="dataPerPeg">
+					<tbody>
 						<?php foreach ($data_perjadin as $key => $nilai) : ?>
 							<tr id="<?= $nilai->perjadin_id ?>">
 								<td class="number text-center"><?= $key + 1 ?></td>

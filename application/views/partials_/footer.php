@@ -55,7 +55,7 @@
                         <input class="form-control" type="hidden" id="perjadin_id" name="perjadin_id" value="">
                         <div class="form-group col-lg-5 mb-0">
                             <label class="mt-2" for="nip">NIP</label>
-                            <select class="form-control custom-select" id='nip' name="nip">
+                            <select class="form-control custom-select" id='nip' name="nip" disabled>
                                 <option value="" selected>--Pilih NIP--</option>
                                 <?php foreach ($data_user as $value) { ?>
                                     <option value="<?= $value->nip ?>" <?= set_select('nip', $value->nip) ?> data-name='<?= $value->name ?>'><?= $value->nip ?></option>
@@ -75,7 +75,7 @@
                     <div class="form-row ml-3">
                         <div class="form-group col-lg-4 mb-0">
                             <label class="mt-2" for="attribute">Atribut</label>
-                            <select class="form-control custom-select" id="attribute" name="attribute">
+                            <select class="form-control custom-select" id="attribute" name="attribute" disabled>
                                 <option value="" selected>--Pilih Atribut--</option>
                                 <?php foreach ($data_attr as $value) { ?>
                                     <option value="<?= $value->attribute_id ?>" <?= set_select('attribute', $value->attribute_id) ?> data-attribute='<?= $value->attribute ?>'><?= $value->attribute_id . '-' . $value->attribute ?></option>
@@ -84,7 +84,7 @@
                         </div>
                         <div class="form-group col-lg-5 mb-0">
                             <label class="mt-2" for="activity">Kegiatan</label>
-                            <select class="form-control custom-select" id="activity" type="text" name="activity">
+                            <select class="form-control custom-select" id="activity" type="text" name="activity" disabled>
                                 <option value="" selected>--Pilih Kegiatan--</option>
                             </select>
                         </div>
@@ -549,7 +549,8 @@
 <!-- Modal Edit -->
 <script type="text/javascript">
     $(document).ready(function() {
-        $('.open-edit-dialog').click(function() {
+        // $('.open-edit-dialog').click(function() {
+        $('#dataPerPeg').on('click', '.open-edit-dialog', function() {
             var perjadin_id = $(this).data('id');
             var nip = $(this).parents('#' + perjadin_id).children('.nip').data('nip');
             var attribute = $(this).parents('#' + perjadin_id).children('.attribute').data('attribute');
