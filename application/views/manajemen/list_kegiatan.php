@@ -88,7 +88,7 @@
     <div class="row mb-4">
         <div class="col">
             <!-- <a href="<?= base_url('manajemen/kegiatan/addAct'); ?>" class="badge badge-pill badge-primary mb-3">Tambah Data Kegiatan</a> -->
-            <a class="btn btn-info btn-sm mb-4" href="<?= base_url('manajemen/kegiatan/addAct'); ?>" role="button" data-toggle="modal" data-target="#addDataActivity"><i class="fas fa-plus mr-2"></i>Tambah Data Kegiatan</a>
+            <a class="btn btn-primary btn-sm mb-4" href="<?= base_url('manajemen/kegiatan/addAct'); ?>" role="button" data-toggle="modal" data-target="#addDataActivity"><i class="fas fa-plus mr-2"></i>Tambah Data Kegiatan</a>
             <div class="table-responsive">
                 <table class="table table-hover table-sm dataTables" width="100%" cellspacing="0">
                     <thead class="thead-dark">

@@ -10,7 +10,6 @@ class Input_perjadin extends CI_Controller
 		is_logged_in();
 		$this->load->model('auth_model');
 		$this->load->model('perjadin_model');
-		$this->load->library('form_validation');
 	}
 
 	public function index()
@@ -81,13 +80,17 @@ class Input_perjadin extends CI_Controller
 		$this->form_validation->set_rules($config);
 
 		if ($this->form_validation->run()) {
-			if ($this->perjadin_model->insert()) { //simpan data ke db
+			$nip = $this->input->post('nip');
+			$date = $this->input->post('date');
+
+			if ($this->perjadin_model->existDataCheck($nip, $date)->num_rows() < 1) {
+				$this->perjadin_model->insert();
 				$this->session->set_flashdata('success', 'Data berhasil disimpan');
 				redirect('perjadin_pegawai/input_perjadin');
+			} else {
+				$this->session->set_flashdata('danger', 'Data pegawai pada tanggal tersebut sudah ada. Silahkan pilih tanggal lain.');
+				redirect('perjadin_pegawai/input_perjadin');
 			}
-
-			$this->session->set_flashdata('danger', 'Data gagal disimpan');
-			redirect('perjadin_pegawai/input_perjadin');
 		} else {
 			$data['title'] = 'Input Perjadin';
 			$data['subMenuName'] = 'Input Perjadin';

@@ -108,18 +108,27 @@ class Perjadin_model extends CI_Model
 			->get_where($this->mytable, ['perjadin_id' => $idPerjadin])->row();
 	} //mengembalikan sebuah objek (yg sesuai dg id)
 
+	public function existDataCheck($nip, $date)
+	{
+		$cond = [
+			'nip' => $nip,
+			'date' => $date
+		];
+		return $this->db->get_where($this->mytable, $cond);
+	}
+
 	public function insert()
 	{
 		$nip = $this->input->post('nip');
 		$code = $this->input->post('code');
 		$date = $this->input->post('date');
 
-		$data = array(
+		$data = [
 			'perjadin_id' => uniqid(),
 			'nip' => $nip,
 			'activity_code' => $code,
 			'date' => $date
-		);
+		];
 
 		return $this->db->insert($this->mytable, $data);
 	}

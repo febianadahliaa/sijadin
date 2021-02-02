@@ -207,7 +207,7 @@
 <div class="modal fade" id="addDataActivity" tabindex="-1" aria-labelledby="addDataActivityLabel" aria-hidden="true" data-backdrop="static" data-keyboard="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header bg-info">
+            <div class="modal-header bg-primary">
                 <h5 class="modal-title h5 text-light" id="addDataActivityLabel">Tambah Data Kegiatan</h5>
                 <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close"><i class="fas fa-times"></i></button>
             </div>
