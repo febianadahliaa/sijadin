@@ -65,7 +65,7 @@
 
                         <div class="form-group col-lg-6 mb-0">
                             <label class="mt-2" for="nama">Nama Pegawai</label>
-                            <input class="form-control" type="text" name="name" id='name' placeholder="-" value="<?= set_value('name') ?>" readonly />
+                            <input class="form-control" type="text" name="name" id='name' placeholder="-" value="<?= set_value('name') ?>" disabled />
                         </div>
                         <div class="form-group col-8">
                             <?= form_error('nip', '<small class="text-danger pl-3">', '</small>') ?>
@@ -90,7 +90,7 @@
                         </div>
                         <div class="form-group col-lg-2 mb-0">
                             <label class="mt-2" for="kode">Kode</label>
-                            <input class="form-control <?php echo form_error('kode') ? 'is-invalid' : '' ?>" type="text" id="code" name="code" list="code" placeholder="-" readonly />
+                            <input class="form-control <?php echo form_error('kode') ? 'is-invalid' : '' ?>" type="text" id="code" name="code" list="code" placeholder="-" disabled />
                             <div class="invalid-feedback"><?php echo form_error('kode') ?></div>
                         </div>
                         <div class="form-group col-8">
@@ -100,13 +100,13 @@
                     <div class="form-row ml-3">
                         <div class="form-group">
                             <label for="tanggal">Tanggal</label>
-                            <input class="form-control" type="date" id="date" name="date" value="<?= set_value('date') ?>" />
+                            <input class="form-control" type="date" id="date" name="date" value="<?= set_value('date') ?>" required />
                             <?= form_error('date', '<small class="text-danger pl-3">', '</small>') ?>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <input class="btn btn-primary" type="submit" name="btn" value="Simpan" />
+                    <input class="btn btn-primary submit" type="submit" name="btn" value="Simpan" disabled />
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Batalkan</button>
                 </div>
             </form>
@@ -623,6 +623,16 @@
 
                 // Fill Date
                 $('input#date.form-control').val(date);
+
+                var previousValue = $('input#date.form-control').val();
+                $('input#date.form-control').on("change", function() {
+                    var currentValue = $(this).val();
+                    if (currentValue != previousValue) {
+                        $('input.btn.submit').prop("disabled", false);
+                    } else {
+                        $('input.btn.submit').prop("disabled", true);
+                    }
+                });
             }
         })
     });

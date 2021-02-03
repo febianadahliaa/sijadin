@@ -31,26 +31,7 @@ class List_perjadin extends CI_Controller
 
 	public function edit()
 	{
-		// $data['perjadin'] = $this->perjadin_model->getById($idPerjadin);
-		// if (!isset($idPerjadin)) redirect(site_url('perjadin_pegawai/list_perjadin'));
-
 		$config = [
-			[
-				'field' => 'nip',
-				'label' => 'NIP',
-				'rules' => 'required',
-				'errors' => [
-					'required' => 'NIP belum dipilih'
-				],
-			],
-			[
-				'field' => 'activity',
-				'label' => 'Kegiatan',
-				'rules' => 'required',
-				'errors' => [
-					'required' => 'Jenis Kegiatan belum dipilih'
-				],
-			],
 			[
 				'field' => 'date',
 				'label' => 'Tanggal',
@@ -63,29 +44,27 @@ class List_perjadin extends CI_Controller
 		$this->form_validation->set_rules($config);
 
 		$perjadin_id = $this->input->post('perjadin_id');
-		$nip = $this->input->post('nip');
-		$code = $this->input->post('code');
+		$nip = $this->perjadin_model->getById($perjadin_id)->nip;
 		$date = $this->input->post('date');
 
 		$data = array(
-			'nip' => $nip,
-			'activity_code' => $code,
 			'date' => $date
 		);
 
 		if ($this->form_validation->run()) {
-			if ($this->perjadin_model->update($data, $perjadin_id)) { //update data
-				$this->session->set_flashdata('success', 'Data berhasil disimpan');
+			if ($this->perjadin_model->existDataCheck($nip, $date)->num_rows() < 1) {
+				if ($this->perjadin_model->update($data, $perjadin_id)) { //update data
+					$this->session->set_flashdata('success', 'Data berhasil disimpan');
+					redirect(site_url('perjadin_pegawai/list_perjadin'));
+				}
+				$this->session->set_flashdata('danger', 'Data gagal disimpan. Terjadi error saat disimpan.');
 				redirect(site_url('perjadin_pegawai/list_perjadin'));
 			}
+			$this->session->set_flashdata('danger', 'Data gagal disimpan. Pegawai pada tanggal tersebut sudah ada. Silahkan pilih tanggal lain!');
+			redirect(site_url('perjadin_pegawai/list_perjadin'));
 		}
-
-		// $data['title'] = 'Edit Perjadin Pegawai';
-		// $this->load->view('partials_/header', $data);
-		// $this->load->view('partials_/sidebar', $data);
-		// $this->load->view('partials_/topbar', $data);
-		// $this->load->view('perjadin/edit_perjadin', $data);
-		// $this->load->view('partials_/footer');
+		$this->session->set_flashdata('danger', 'Data gagal disimpan.');
+		redirect(site_url('perjadin_pegawai/list_perjadin'));
 	}
 
 	public function delete($idPerjadin)

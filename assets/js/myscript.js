@@ -12,11 +12,22 @@ $(document).ready(function() {
     });
 
     // Datatables Perjadin
-    $('.dataTable-list').DataTable({
+    $('.dataTables-list').DataTable({
         "lengthMenu": [
             [+5, 10, 25, 50, -1],
             [5, 10, 25, 50, "All"]
         ],
+        "info": false,
+        "bLengthChange": false,
+        "autoWidth": false,
+        "columns": [
+            { "width": "5%" },
+            { "width": "10%" },
+            { "width": "20%" },
+            null,
+            { "width": "13%" },
+            { "width": "12%" },
+          ]
     });
     
     // Datatables Perjadin Saya

@@ -17,11 +17,15 @@
 				echo '<div class="alert alert-success" role="alert">';
 				echo $this->session->flashdata('success');
 				echo '</div>';
+			} else if ($this->session->flashdata('danger') != '') {
+				echo '<div class="alert alert-danger" role="alert">';
+				echo $this->session->flashdata('danger');
+				echo '</div>';
 			}
 			?>
 
 			<div class="table-responsive">
-				<table class="table table-hover dataTables" id="dataPerPeg" width="100%" cellspacing="0">
+				<table class="table table-hover dataTables-list" id="dataPerPeg" width="100%" cellspacing="0">
 					<thead class="thead-dark">
 						<tr>
 							<th class="text-center">No.</th>
